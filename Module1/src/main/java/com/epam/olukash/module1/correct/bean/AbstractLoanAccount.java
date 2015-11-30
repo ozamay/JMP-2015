@@ -1,6 +1,5 @@
 package com.epam.olukash.module1.correct.bean;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
