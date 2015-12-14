@@ -6,10 +6,17 @@ package com.epam.olukash.module3.observer;
  */
 public class Sashka implements Observer
 {
-    public void update(String currentWord, int wordCounter, int numberCounter, String longestWord, String reverseWord)
+    private MessageBuilder messageBuilder;
+
+    public Sashka()
     {
-        System.out.println("Sashka confirm: current word - " + currentWord + ", wordCounter - " + wordCounter +
-                ", numberCounter - " + numberCounter + ", longestWord - " + longestWord +
-                ", reverseWord - " + reverseWord + ".");
+        this.messageBuilder = new MessageBuilder("Leshka");
+    }
+    public void update(WordInfo wordInfo, TextInfo textInfo)
+    {
+        messageBuilder.appendTextInfo(wordInfo);
+        messageBuilder.appendTextInfo(textInfo);
+        messageBuilder.build();
+        messageBuilder.clear();
     }
 }

@@ -3,20 +3,32 @@ package com.epam.olukash.module3.observer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.math.NumberUtils;
+
 /**
  * @author oleksii.lukash
  */
 public class WordListener implements Observable {
     private List<Observer> observers;
-    private int wordCounter;
-    private int numberCounter;
     private String currentWord;
-    private String longestWord;
     private String reverseWord;
+    private TextInfo textInfo;
+    private WordInfo wordInfo;
 
     public WordListener()
     {
         this.observers = new ArrayList<>();
+        this.textInfo = new TextInfo();
+    }
+
+    public void processWord(WordInfo wordInfo)
+    {
+        this.currentWord = wordInfo.getCurrentWord();
+        this.wordInfo = wordInfo;
+        updateWordCounter();
+        updateNumberCounter();
+        updateLongestWord();
+        notifyObservers();
     }
 
     public void registerObserver(Observer observer)
@@ -33,53 +45,34 @@ public class WordListener implements Observable {
     {
         for(Observer observer : observers)
         {
-            observer.update(currentWord, wordCounter, numberCounter, longestWord, reverseWord);
+            observer.update(wordInfo, textInfo);
         }
     }
 
-    public void setCurrentWord(String currentWord)
+    private void updateWordCounter()
     {
-        this.currentWord = currentWord;
-        updateWordCounter();
-        updateNumberCounter(currentWord);
-        updateLongestWord(currentWord);
-        updateReverseWord(currentWord);
-        notifyObservers();
+        int wordCounter = textInfo.getWordCounter();
+        wordCounter++;
+        textInfo.setWordCounter(wordCounter);
     }
 
-    public void updateWordCounter()
+    private void updateNumberCounter()
     {
-        this.wordCounter++;
-    }
-
-    public void updateNumberCounter(String currentWord)
-    {
-        try
+        if(NumberUtils.isNumber(currentWord))
         {
-            Integer.parseInt(currentWord);
-        } catch (Exception e)
-        {
-            //smth to do
-            return;
-        }
-        this.numberCounter++;
-    }
-
-    public void updateLongestWord(String currentWord)
-    {
-        if(longestWord == null)
-        {
-            this.longestWord = currentWord;
-        }
-
-        if(currentWord.length() >= longestWord.length())
-        {
-            this.longestWord = currentWord;
+            int numberCounter = textInfo.getNumberCounter();
+            numberCounter++;
+            textInfo.setNumberCounter(numberCounter);
         }
     }
 
-    public void updateReverseWord(String currentWord) {
-        this.reverseWord = new StringBuilder(currentWord).reverse().toString();
+    private void updateLongestWord()
+    {
+        String longestWord = textInfo.getLongestWord();
+        if(longestWord == null || currentWord.length() >= longestWord.length())
+        {
+            textInfo.setLongestWord(currentWord);
+        }
     }
 
 }

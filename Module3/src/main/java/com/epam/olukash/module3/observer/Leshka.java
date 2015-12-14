@@ -5,10 +5,18 @@ package com.epam.olukash.module3.observer;
  */
 public class Leshka implements Observer
 {
-    public void update(String currentWord, int wordCounter, int numberCounter, String longestWord, String reverseWord)
+    private MessageBuilder messageBuilder;
+
+    public Leshka()
     {
-        System.out.println("Leshka confirm: current word - " + currentWord + ", wordCounter - " + wordCounter +
-                            ", numberCounter - " + numberCounter + ", longestWord - " + longestWord +
-                            ", reverseWord - " + reverseWord + ".");
+        this.messageBuilder = new MessageBuilder("Leshka");
+    }
+
+    public void update(WordInfo wordInfo, TextInfo textInfo)
+    {
+        messageBuilder.appendTextInfo(wordInfo);
+        messageBuilder.appendTextInfo(textInfo);
+        System.out.println(messageBuilder.build());
+        messageBuilder.clear();
     }
 }
