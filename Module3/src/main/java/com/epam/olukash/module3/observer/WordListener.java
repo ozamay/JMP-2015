@@ -16,7 +16,7 @@ public class WordListener implements Observable {
 
     public WordListener()
     {
-        this.observers = new ArrayList<Observer>();
+        this.observers = new ArrayList<>();
     }
 
     public void registerObserver(Observer observer)

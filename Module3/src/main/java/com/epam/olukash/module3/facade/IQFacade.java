@@ -24,7 +24,7 @@ public class IQFacade
         {
             persons = Arrays.asList(secondPerson.getName() + " is smarter");
         } else {
-            persons = Arrays.asList("You are indentical");
+            persons = Arrays.asList("You are identical");
         }
         writeToFile(persons);
     }
@@ -45,7 +45,7 @@ public class IQFacade
         writeToFile(persons);
     }
 
-    public void writeToFile(List<String> personList)
+    private void writeToFile(List<String> personList)
     {
         try {
             Path file = Paths.get("src/main/resources/persons.txt");

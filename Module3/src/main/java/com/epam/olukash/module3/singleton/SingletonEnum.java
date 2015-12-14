@@ -5,5 +5,5 @@ package com.epam.olukash.module3.singleton;
  */
 public enum  SingletonEnum
 {
-    SINGLETON_ENUM;
+    SINGLETON_ENUM
 }

@@ -28,10 +28,7 @@ public class Runner
 
         List<String> words = TextReader.formatText("Module3/src/main/resources/test");
 
-        for (String word : words)
-        {
-            wordListener.setCurrentWord(word);
-        }
+        words.forEach(wordListener::setCurrentWord);
 
         //////////////////////////////////////////
         //Facade pattern
