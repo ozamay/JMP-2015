@@ -26,7 +26,7 @@ public class Runner
         wordListener.registerObserver(leshka);
         wordListener.registerObserver(sashka);
 
-        List<String> words = TextReader.formatText("src/main/resources/test");
+        List<String> words = TextReader.formatText("Module3/src/main/resources/test");
 
         for (String word : words)
         {
