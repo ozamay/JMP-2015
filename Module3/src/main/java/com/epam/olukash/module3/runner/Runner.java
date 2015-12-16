@@ -78,6 +78,7 @@ public class Runner
 
         for (String processWord : words)
         {
+            System.out.println("processWord word: " + processWord);
             wordListenerV2.processWord(processWord);
         }
     }
