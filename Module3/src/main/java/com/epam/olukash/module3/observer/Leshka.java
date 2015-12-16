@@ -9,11 +9,12 @@ public class Leshka implements Observer
 
     public Leshka()
     {
-        this.messageBuilder = new MessageBuilder("Leshka");
+        this.messageBuilder = new MessageBuilder();
     }
 
     public void update(WordInfo wordInfo, TextInfo textInfo)
     {
+        messageBuilder.appendOberver("Leshka");
         messageBuilder.appendTextInfo(wordInfo);
         messageBuilder.appendTextInfo(textInfo);
         System.out.println(messageBuilder.build());

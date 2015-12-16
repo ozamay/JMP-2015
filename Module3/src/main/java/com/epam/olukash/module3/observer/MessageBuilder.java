@@ -1,5 +1,7 @@
 package com.epam.olukash.module3.observer;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author Oleksii_Lukash
  * @date 12/14/2015
@@ -7,18 +9,17 @@ package com.epam.olukash.module3.observer;
 public class MessageBuilder
 {
 	private StringBuilder builder;
+   	private String userName;
+
+	public MessageBuilder(String userName)
+	{
+		this.userName = userName;
+		this.builder = new StringBuilder();
+	}
 
 	public MessageBuilder()
 	{
 		this.builder = new StringBuilder();
-	}
-
-	public MessageBuilder(String observerName)
-	{
-		this.builder = new StringBuilder();
-		builder.append(observerName);
-		builder.append(" confirm: ");
-
 	}
 
 	public MessageBuilder appendTextInfo(TextInfo textInfo)
@@ -45,9 +46,18 @@ public class MessageBuilder
 
 	public String build()
 	{
-		return builder.toString();
+		StringBuilder sb = new StringBuilder();
+		sb.append(userName);
+		sb.append(" confirm: ");
+		return sb.append(builder.toString()).toString();
 	}
 
+	public MessageBuilder appendOberver(String observerName)
+	{
+		builder.append(observerName);
+		builder.append(" confirm: ");
+		return this;
+	}
 	public void clear()
 	{
 		builder = new StringBuilder();

@@ -10,13 +10,15 @@ public class Sashka implements Observer
 
     public Sashka()
     {
-        this.messageBuilder = new MessageBuilder("Leshka");
+        this.messageBuilder = new MessageBuilder();
     }
     public void update(WordInfo wordInfo, TextInfo textInfo)
     {
+        messageBuilder.appendOberver("Sashka");
         messageBuilder.appendTextInfo(wordInfo);
         messageBuilder.appendTextInfo(textInfo);
         messageBuilder.build();
+        System.out.println(messageBuilder.build());
         messageBuilder.clear();
     }
 }

@@ -1,13 +1,14 @@
 package com.epam.olukash.module3.observer;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author Oleksii_Lukash
  * @date 12/14/2015
  */
 public class WordInfo
 {
-	private String currentWord;
-	private String reverseWord;
+	private final String currentWord;
 
 	public WordInfo(String word)
 	{
@@ -16,7 +17,7 @@ public class WordInfo
 
 	public String getReverseWord()
 	{
-		return currentWord != null ? new StringBuilder(currentWord).reverse().toString() : null;
+		return StringUtils.reverse(currentWord);
 	}
 
 	public String getCurrentWord()
