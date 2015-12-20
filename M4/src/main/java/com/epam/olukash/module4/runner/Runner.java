@@ -1,6 +1,7 @@
 package com.epam.olukash.module4.runner;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 /**
@@ -13,21 +14,14 @@ public class Runner
 	{
 		Runnable doCreateAndShowGUI = new Runnable() {
 			public void run() {
-				createAndShowGUI();
+				GUICreator creator = new GUICreator(200, 200);
+				creator.addButton(new JButton("Standard"));
+				HighlightButton hb = new HighlightButton("Highlighted");
+				hb.addHover(Color.lightGray);
+				creator.addButton(hb);
 			}
 		};
 		SwingUtilities.invokeLater(doCreateAndShowGUI);
 	}
 
-	private static void createAndShowGUI() {
-		JFrame f = new JFrame();
-		f.getContentPane().setLayout(new FlowLayout());
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(200, 200);
-		f.add(new JButton("Standard"));
-		HighlightButton hb = new HighlightButton("Highlighted");
-		hb.addHover(Color.BLUE);
-		f.add(hb);
-		f.setVisible(true);
-	}
 }
