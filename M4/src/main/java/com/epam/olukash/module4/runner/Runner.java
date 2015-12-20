@@ -28,7 +28,6 @@ public class Runner
 		HighlightButton hb = new HighlightButton("Highlighted");
 		hb.addHover(Color.BLUE);
 		f.add(hb);
-
 		f.setVisible(true);
 	}
 }
