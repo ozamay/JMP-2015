@@ -1,4 +1,4 @@
-package com.epam.olukash.module4.runner;
+package com.epam.olukash.module4.decorator.v1.runner;
 
 import java.awt.*;
 

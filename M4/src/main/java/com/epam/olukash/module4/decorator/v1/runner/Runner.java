@@ -1,4 +1,4 @@
-package com.epam.olukash.module4.runner;
+package com.epam.olukash.module4.decorator.v1.runner;
 
 import java.awt.*;
 
@@ -16,8 +16,7 @@ public class Runner
 			public void run() {
 				GUICreator creator = new GUICreator(200, 200);
 				creator.addButton(new JButton("Standard"));
-				HighlightButton hb = new HighlightButton("Highlighted");
-				hb.addHover(Color.lightGray);
+				HighlightButton hb = new HighlightButton("Highlighted", Color.lightGray);
 				creator.addButton(hb);
 			}
 		};

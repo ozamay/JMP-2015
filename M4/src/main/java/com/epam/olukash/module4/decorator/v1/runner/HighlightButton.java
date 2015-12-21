@@ -1,4 +1,4 @@
-package com.epam.olukash.module4.runner;
+package com.epam.olukash.module4.decorator.v1.runner;
 
 import java.awt.*;
 import javax.swing.*;
@@ -9,12 +9,13 @@ import javax.swing.*;
  */
 public class HighlightButton extends AbstractButton
 {
-	protected HighlightButton(String title)
+	protected HighlightButton(String title, Color color)
 	{
 		super(title);
+		addHover(color);
 	}
 
-	public void addHover(final Color colorHover)
+	private void addHover(final Color colorHover)
 	{
 		addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseEntered(java.awt.event.MouseEvent evt) {
