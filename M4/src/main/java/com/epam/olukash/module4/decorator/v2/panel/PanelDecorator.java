@@ -1,22 +1,21 @@
 package com.epam.olukash.module4.decorator.v2.panel;
 
 import java.awt.*;
-import javax.swing.*;
 
 /**
  * @author Oleksii_Lukash
  * @date 12/21/2015
  */
-public class PanelDecorator extends JFrame
+public class PanelDecorator extends AbstractPanel
 {
-	protected final JFrame frame;
+	protected final AbstractPanel panel;
 
-	public PanelDecorator(JFrame jFrame)
+	public PanelDecorator(AbstractPanel jpanel)
 	{
-		this.frame = jFrame;
+		this.panel = jpanel;
 	}
 
 	public Component add(Component component){
-		return frame.add(component);
+		return panel.add(component);
 	}
 }

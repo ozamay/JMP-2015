@@ -9,9 +9,9 @@ import javax.swing.*;
  */
 public class AdminPanel extends PanelDecorator
 {
-	public AdminPanel(JFrame jFrame)
+	public AdminPanel(AbstractPanel panel)
 	{
-		super(jFrame);
+		super(panel);
 	}
 
 	public Component add(final Component component)
