@@ -1,14 +1,13 @@
-package com.epam.olukash.module4.v2.runner;
+package com.epam.olukash.module4.decorator.v2.panel;
 
 import java.awt.*;
-
 import javax.swing.*;
 
 /**
  * @author Oleksii_Lukash
  * @date 12/21/2015
  */
-public abstract class PanelDecorator extends JFrame
+public class PanelDecorator extends JFrame
 {
 	protected final JFrame frame;
 

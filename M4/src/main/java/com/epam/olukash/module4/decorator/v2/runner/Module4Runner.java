@@ -1,6 +1,9 @@
-package com.epam.olukash.module4.v2.runner;
+package com.epam.olukash.module4.decorator.v2.runner;
 
 import javax.swing.*;
+
+import com.epam.olukash.module4.decorator.v2.panel.AdminPanel;
+import com.epam.olukash.module4.decorator.v2.panel.SimplePanel;
 
 /**
  * @author Oleksii_Lukash

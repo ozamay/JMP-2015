@@ -1,4 +1,4 @@
-package com.epam.olukash.module4.v2.runner;
+package com.epam.olukash.module4.decorator.v2.panel;
 
 import java.awt.*;
 import javax.swing.*;
