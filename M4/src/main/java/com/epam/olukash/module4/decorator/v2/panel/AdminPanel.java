@@ -16,6 +16,8 @@ public class AdminPanel extends PanelDecorator
 
 	public Component add(final Component component)
 	{
+		super.add(component);
+
 		if(component instanceof JButton)
 		{
 			component.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -28,6 +30,6 @@ public class AdminPanel extends PanelDecorator
 			});
 		}
 
-		return super.add(component);
+		return component;
 	}
 }

@@ -12,9 +12,9 @@ import com.epam.olukash.module4.decorator.v2.panel.SimplePanel;
  * @author Oleksii_Lukash
  * @date 12/21/2015
  */
-public class FrameCreator extends JFrame
+public class MainFrame extends JFrame
 {
-	public FrameCreator()
+	public MainFrame()
 	{
 		setDefaultValue();
 		addPanels();
@@ -37,9 +37,9 @@ public class FrameCreator extends JFrame
 		panel.add(new JButton("simple panel"));
 		panel.add(new JButton("simple panel"));
 
-		AbstractPanel apanel = new AdminPanel(panel);
-		apanel.add(new JButton("admin panel"));
-		apanel.add(new JButton("admin panel"));
+		AbstractPanel adminPanel = new AdminPanel(panel);
+		adminPanel.add(new JButton("admin panel"));
+		adminPanel.add(new JButton("admin panel"));
 
 		contentPane.add(panel);
 		setContentPane(contentPane);

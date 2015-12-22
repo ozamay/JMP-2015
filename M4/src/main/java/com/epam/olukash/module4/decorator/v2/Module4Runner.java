@@ -1,6 +1,6 @@
 package com.epam.olukash.module4.decorator.v2;
 
-import com.epam.olukash.module4.decorator.v2.frame.FrameCreator;
+import com.epam.olukash.module4.decorator.v2.frame.MainFrame;
 
 /**
  * @author Oleksii_Lukash
@@ -10,6 +10,6 @@ public class Module4Runner
 {
 	public static void main(String[] args)
 	{
-		new FrameCreator();
+		new MainFrame();
 	}
 }
