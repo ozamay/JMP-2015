@@ -8,7 +8,6 @@ public class CCRunner
 {
 	public static void main(String args[])
 	{
-		//path to Semaphore class: com.epam.olukash.module5.lessone.Semaphore
 		new MainExample();
 	}
 }

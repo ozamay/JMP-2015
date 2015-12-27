@@ -14,8 +14,8 @@ import com.epam.olukash.module5.classloader.MyClassLoader;
  */
 public class MainExample
 {
-	private final Logger logger = Logger.getLogger(MainExample.class.getName());
-
+	private static final Logger logger = Logger.getLogger(MainExample.class);
+	private static String className = "Semaphore";
 	public MainExample()
 	{
 		init();
@@ -39,13 +39,14 @@ public class MainExample
 	private void load(String classPath)
 	{
 		try
-		{   MyClassLoader myClassLoader = new MyClassLoader();
+		{
+			MyClassLoader myClassLoader = new MyClassLoader(classPath);
 			logger.info("Status: in progress. Loading Class '" + classPath + "'");
-			Class myClass = myClassLoader.loadClass(classPath);
+			Class myClass = myClassLoader.loadClass(className);
 
 			if(myClass != null)
 			{
-				logger.info("Status: success. Class with name [" + myClass + "] loaded.");
+				logger.info("Status: success. Class with name [" + myClass.getName() + "] loaded.");
 				Constructor constructor = myClass.getConstructor();
 				Object myClassObject = constructor.newInstance();
 

@@ -1,10 +1,11 @@
 package com.epam.olukash.module5.classloader;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -13,11 +14,13 @@ import org.apache.log4j.Logger;
  */
 public class MyClassLoader extends ClassLoader
 {
-	private final Logger logger = Logger.getLogger(MyClassLoader.class.getName());
+	private static final Logger logger = Logger.getLogger(MyClassLoader.class);
+	private String pathToClass;
 
-	public MyClassLoader()
+	public MyClassLoader(String classPath)
 	{
 		super(MyClassLoader.class.getClassLoader());
+		this.pathToClass = classPath;
 	}
 
 	@Override
@@ -30,8 +33,7 @@ public class MyClassLoader extends ClassLoader
 	{
 		try
 		{
-			byte[] bytes = loadClassData(name);
-
+			byte[] bytes = loadClassData();
 			return defineClass(name, bytes, 0, bytes.length);
 		}
 		catch (CannotLoadClassException ex)
@@ -48,20 +50,18 @@ public class MyClassLoader extends ClassLoader
 		return null;
 	}
 
-	private byte[] loadClassData(String className)
+	private byte[] loadClassData()
 	{
-		File f = new File("target/classes/" + className.replaceAll("\\.", "/") + ".class");
-		int size = (int) f.length();
-		byte buff[] = new byte[size];
-		try(DataInputStream dis = new DataInputStream(new FileInputStream(f)))
-		{
-			dis.readFully(buff);
-		}
-		catch (IOException e)
-		{
+		String classPath = !pathToClass.contains(".class") ? (pathToClass + ".class") : pathToClass;
+		Path path = Paths.get(classPath);
+		byte[] classData;
+		try {
+			classData = Files.readAllBytes(path);
+			pathToClass = StringUtils.EMPTY;
+		} catch (IOException e) {
 			throw new CannotLoadClassException();
 		}
-		return buff;
+		return classData;
 	}
 
 }
