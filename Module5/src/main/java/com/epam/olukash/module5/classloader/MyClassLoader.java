@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
  */
 public class MyClassLoader extends ClassLoader
 {
-	static Logger logger = Logger.getLogger(MyClassLoader.class.getName());
+	private final Logger logger = Logger.getLogger(MyClassLoader.class.getName());
 
 	public MyClassLoader()
 	{

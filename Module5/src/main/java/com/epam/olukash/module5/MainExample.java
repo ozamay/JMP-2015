@@ -14,7 +14,7 @@ import com.epam.olukash.module5.classloader.MyClassLoader;
  */
 public class MainExample
 {
-	static Logger logger = Logger.getLogger(MainExample.class.getName());
+	private final Logger logger = Logger.getLogger(MainExample.class.getName());
 
 	public MainExample()
 	{
