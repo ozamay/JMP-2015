@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -25,17 +26,18 @@ public class MyClassLoader extends ClassLoader
 	@Override
 	protected Class<?> findClass(String name) throws ClassNotFoundException
 	{
-		String classPath = !pathToClass.contains(".class") ? (pathToClass + ".class") : pathToClass;
+		String classPath = StringUtils.remove(pathToClass, ".class") + ".class";
 		Path path = Paths.get(classPath);
-		byte[] classData = null;
 		try
 		{
-			classData = Files.readAllBytes(path);
+			byte[] classData = Files.readAllBytes(path);
+			return defineClass(name, classData, 0, classData.length);
 		}
 		catch (IOException e)
 		{
 			logger.error("Status: error. Class with name [" + name + "] not found. " + e);
+			throw new CannotLoadClassException();
 		}
-		return defineClass(name, classData, 0, classData.length);
+
 	}
 }

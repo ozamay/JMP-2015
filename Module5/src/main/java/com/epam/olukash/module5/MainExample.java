@@ -4,8 +4,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Scanner;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.epam.olukash.module5.classloader.CannotLoadClassException;
 import com.epam.olukash.module5.classloader.MyClassLoader;
 
 /**
@@ -30,9 +32,14 @@ public class MainExample
 		while (scanner.hasNext())
 		{
 			String classPath = scanner.nextLine();
-			if (classPath != null && !classPath.isEmpty())
+			if (classPath != null && !classPath.isEmpty() &&
+					(StringUtils.endsWithAny(classPath, "Semaphore.class") || StringUtils.endsWithAny(classPath, "Semaphore")))
 			{
 				load(classPath);
+			}
+			else
+			{
+				logger.info("Class path is not correct.");
 			}
 			System.out.println("One more: ");
 		}
