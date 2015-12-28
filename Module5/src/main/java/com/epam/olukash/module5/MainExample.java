@@ -33,7 +33,7 @@ public class MainExample
 		{
 			String classPath = scanner.nextLine();
 			if (classPath != null && !classPath.isEmpty() &&
-					(StringUtils.endsWithAny(classPath, "Semaphore.class") || StringUtils.endsWithAny(classPath, "Semaphore")))
+					(StringUtils.endsWithAny(classPath, "Semaphore.class", "Semaphore")))
 			{
 				load(classPath);
 			}
