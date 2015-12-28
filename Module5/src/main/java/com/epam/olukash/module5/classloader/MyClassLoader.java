@@ -24,44 +24,19 @@ public class MyClassLoader extends ClassLoader
 	}
 
 	@Override
-	public Class<?> loadClass(String name)
-	{
-		return findDefineClass(name);
-	}
-
-	public Class<?> findDefineClass(String name)
-	{
-		try
-		{
-			byte[] bytes = loadClassData();
-			return defineClass(name, bytes, 0, bytes.length);
-		}
-		catch (CannotLoadClassException ex)
-		{
-			try
-			{
-				return super.loadClass(name);
-			}
-			catch (ClassNotFoundException e)
-			{
-				logger.error("Status: error. Class with name [" + name + "] not found. " + e);
-			}
-		}
-		return null;
-	}
-
-	private byte[] loadClassData()
+	protected Class<?> findClass(String name) throws ClassNotFoundException
 	{
 		String classPath = !pathToClass.contains(".class") ? (pathToClass + ".class") : pathToClass;
 		Path path = Paths.get(classPath);
-		byte[] classData;
-		try {
+		byte[] classData = null;
+		try
+		{
 			classData = Files.readAllBytes(path);
-			pathToClass = StringUtils.EMPTY;
-		} catch (IOException e) {
-			throw new CannotLoadClassException();
 		}
-		return classData;
+		catch (IOException e)
+		{
+			logger.error("Status: error. Class with name [" + name + "] not found. " + e);
+		}
+		return defineClass(name, classData, 0, classData.length);
 	}
-
 }

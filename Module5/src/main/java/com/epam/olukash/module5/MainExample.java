@@ -15,7 +15,9 @@ import com.epam.olukash.module5.classloader.MyClassLoader;
 public class MainExample
 {
 	private static final Logger logger = Logger.getLogger(MainExample.class);
-	private static String className = "Semaphore";
+	private static final String CLASS_NAME = "Semaphore";
+	private static final String METHOD_NAME = "lever";
+
 	public MainExample()
 	{
 		init();
@@ -42,7 +44,7 @@ public class MainExample
 		{
 			MyClassLoader myClassLoader = new MyClassLoader(classPath);
 			logger.info("Status: in progress. Loading Class '" + classPath + "'");
-			Class myClass = myClassLoader.loadClass(className);
+			Class myClass = myClassLoader.loadClass(CLASS_NAME);
 
 			if(myClass != null)
 			{
@@ -50,7 +52,7 @@ public class MainExample
 				Constructor constructor = myClass.getConstructor();
 				Object myClassObject = constructor.newInstance();
 
-				Method leverMethod = myClass.getMethod("lever");
+				Method leverMethod = myClass.getMethod(METHOD_NAME);
 				leverMethod.invoke(myClassObject);
 			}
 		}
