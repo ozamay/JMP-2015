@@ -23,7 +23,7 @@ public class PermGenErrorGenerator
 		}
 		catch (OutOfMemoryError r)
 		{
-			System.out.println(r.toString());
+			System.err.println(r.toString());
 		}
 
 	}
