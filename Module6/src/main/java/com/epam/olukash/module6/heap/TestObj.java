@@ -7,10 +7,12 @@ package com.epam.olukash.module6.heap;
 public class TestObj
 {
 	private int x;
+	private Object[] b;
 
 	public TestObj(int x)
 	{
 	 	this.x = x;
+		b = new Object[x * 100000];
 	}
 
 	@Override

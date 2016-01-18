@@ -17,14 +17,12 @@ public class HeapErrorGenerator
 	private void generate()
 	{
 		Map<TestObj, String> map = new HashMap<>();
-		while (true)
+
+		for(int i = 0; i < 100000; i++)
 		{
-			for(int i = 0; i < 1000000000; i++)
-			{
-				TestObj obj = new TestObj(i);
-				map.put(obj, "Number " + i);
-				System.out.println(i);
-			}
+			TestObj obj = new TestObj(i);
+			map.put(obj, "Number " + i);
+			System.out.println(i);
 		}
 	}
 }

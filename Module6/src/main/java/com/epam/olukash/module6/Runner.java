@@ -11,9 +11,9 @@ public class Runner
 {
 	public static void main(String args[])
 	{
-		//new HeapErrorGenerator();
+		new HeapErrorGenerator();
 
-		new PermGenErrorGenerator();
+		//new PermGenErrorGenerator();
 	}
 
 }
