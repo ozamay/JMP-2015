@@ -3,8 +3,6 @@ package com.epam.olukash.module6.heap;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 /**
  * @author Oleksii_Lukash
  * @date 1/18/2016
