@@ -30,7 +30,7 @@ public class PermGenErrorGenerator
 
 	private void generate()
 	{
-		for (int i = 0; i < 1000000; i++) {
+		for (int i = 0; ; i++) {
 			ClassPool pool = ClassPool.getDefault();
 
 			try

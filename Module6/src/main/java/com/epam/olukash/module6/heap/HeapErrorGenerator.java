@@ -18,7 +18,7 @@ public class HeapErrorGenerator
 	{
 		Map<TestObj, String> map = new HashMap<>();
 
-		for(int i = 0; i < 100000; i++)
+		for(int i = 0; ; i++)
 		{
 			TestObj obj = new TestObj(i);
 			map.put(obj, "Number " + i);
