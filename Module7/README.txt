@@ -5,7 +5,7 @@ java -Xms6m -Xmx18m -Xmn2m -XX:PermSize=20m -XX:MaxPermSize=30m -XX:+UseSerialGC
 
 
 Parallel Collector:
-java -Xms3m -Xmx18m -Xmn1m -XX:PermSize=20m -XX:MaxPermSize=20m -XX:+UseParallelGC -cp PATH_TO_JAR_FILE(....JMP-2015\Module7\out\artifacts\Module7_jar\Module7.jar) com.epam.olukash.module7.Main
+java -Xms3m -Xmx12m -Xmn1m -XX:PermSize=20m -XX:MaxPermSize=20m -XX:+UseParallelGC -cp PATH_TO_JAR_FILE(....JMP-2015\Module7\out\artifacts\Module7_jar\Module7.jar) com.epam.olukash.module7.Main
 
 
 Parallel Old Collector:

@@ -1,7 +1,7 @@
 package com.epam.olukash.module7.testobj;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Oleksii_Lukash
@@ -13,12 +13,13 @@ public class TestClass
 	{
 		for (int i = 0; ; i++)
 		{
-			List<Double> list = new ArrayList<>();
+			Map<Double, Object> map = new HashMap<>();
 			for (int j = 0; j < 20; j++)
 			{
-				list.add(Math.random());
+				Object[] object = new Object[100000];
+				map.put(Math.random(), object);
 			}
-			list = null;
+			map = null;
 		}
 	}
 }
