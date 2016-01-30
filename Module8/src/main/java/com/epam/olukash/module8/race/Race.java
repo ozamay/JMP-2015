@@ -28,8 +28,7 @@ public class Race implements ThreadCompleteListener
 		for (int i = 0; i < 10; i++)
 		{
 			Random random = new Random();
-			int speed = random.nextInt(100);
-			Car car = new Car("Car#" + i, speed, latch);
+			Car car = new Car("Car#" + i, random.nextInt(100), latch);
 			car.start();
 			car.addListener(this);
 			threads.add(car);
