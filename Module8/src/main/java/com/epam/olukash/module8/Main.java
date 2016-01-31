@@ -10,7 +10,7 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		Race race = new Race();
+		Race race = new Race(10);
 		race.run();
 	}
 }

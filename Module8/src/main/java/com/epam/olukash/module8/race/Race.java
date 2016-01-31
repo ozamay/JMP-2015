@@ -21,12 +21,17 @@ public class Race implements ThreadCompleteListener
 	private int place = 0;
 	private int carCount;
 
+	public Race(int carCount)
+	{
+		this.carCount = carCount;
+	}
+
 	public void run()
 	{
 		CountDownLatch latch = new CountDownLatch(1);
 		List<Car> threads = new ArrayList<>();
 
-		for (int i = 0; i < carCount; i++)
+		for (int i = 1; i <= carCount; i++)
 		{
 			Random random = new Random();
 			Car car = new Car("Car#" + i, random.nextInt(100), latch);
