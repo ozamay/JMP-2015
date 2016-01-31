@@ -19,13 +19,14 @@ public class Race implements ThreadCompleteListener
 {
 	private static final Logger log = Logger.getLogger(Race.class);
 	private int place = 0;
+	private int carCount;
 
 	public void run()
 	{
 		CountDownLatch latch = new CountDownLatch(1);
 		List<Car> threads = new ArrayList<>();
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < carCount; i++)
 		{
 			Random random = new Random();
 			Car car = new Car("Car#" + i, random.nextInt(100), latch);
@@ -55,4 +56,13 @@ public class Race implements ThreadCompleteListener
 		}
 	}
 
+	public int getCarCount()
+	{
+		return carCount;
+	}
+
+	public void setCarCount(int carCount)
+	{
+		this.carCount = carCount;
+	}
 }
