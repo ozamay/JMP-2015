@@ -12,7 +12,6 @@ import com.epam.olukash.module8.race.ThreadCompleteListener;
 public abstract class NotifyingThread extends Thread
 {
 	private Set<ThreadCompleteListener> listeners = new HashSet<>();
-	private boolean interrupted;
 
 	public final void addListener(final ThreadCompleteListener listener)
 	{
@@ -35,16 +34,9 @@ public abstract class NotifyingThread extends Thread
 	@Override
 	public final void run()
 	{
-		try
+		if(!doRun())
 		{
-			interrupted = doRun();
-		}
-		finally
-		{
-			if(!interrupted)
-			{
-				notifyListeners();
-			}
+			notifyListeners();
 		}
 	}
 
