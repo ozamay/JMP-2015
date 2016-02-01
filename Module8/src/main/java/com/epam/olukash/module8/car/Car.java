@@ -10,19 +10,13 @@ import org.apache.log4j.Logger;
  */
 public class Car extends NotifyingThread
 {
-	private static final long MAX_DISTANCE = 10000;
 	private static final Logger log = Logger.getLogger(Car.class);
+	private static final long MAX_DISTANCE = 10000;
 
 	private CountDownLatch latch;
 	private long friction;
 	private long distance;
 	private String carName;
-
-	public Car(String name, CountDownLatch latch) {
-		this.latch = latch;
-		this.carName = name;
-		this.friction = 100;
-	}
 
 	public Car (String name, long friction, CountDownLatch latch) {
 		this.latch = latch;
@@ -34,6 +28,7 @@ public class Car extends NotifyingThread
 	public boolean doRun()
 	{
 		try {
+			log.info(carName + " is ready!");
 			latch.await();
 			while (distance < MAX_DISTANCE) {
 				Thread.sleep(friction);

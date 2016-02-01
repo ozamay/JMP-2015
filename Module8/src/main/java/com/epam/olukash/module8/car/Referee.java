@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 public class Referee implements Runnable
 {
 	private static final Logger log = Logger.getLogger(Referee.class);
+	private static final Logger resultLog = Logger.getLogger("reportsLogger");
 	private static final long TIME_FOR_DISQUALIFICATION = 5000;
 
 	private List<Car> threads;
@@ -30,14 +31,16 @@ public class Referee implements Runnable
 	{
 		try
 		{
+			log.info("REFEREE IS READY");
 			latch.await();
 			if(threads != null && !threads.isEmpty())
 			{
 				Thread.sleep(TIME_FOR_DISQUALIFICATION);
 				Random generator = new Random();
 				int i = generator.nextInt(threads.size()-1);
+				resultLog.info(threads.get(i).getCarName() + " might be a cheater");
 				threads.get(i).interrupt();
-				log.info("DISQUALIFICATION!!! " + threads.get(i).getCarName());
+				resultLog.info("DISQUALIFICATION!!! " + threads.get(i).getCarName());
 			}
 		}
 		catch (InterruptedException e)

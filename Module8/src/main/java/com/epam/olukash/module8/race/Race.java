@@ -18,6 +18,7 @@ import com.epam.olukash.module8.car.NotifyingThread;
 public class Race implements ThreadCompleteListener
 {
 	private static final Logger log = Logger.getLogger(Race.class);
+	private static final Logger resultLog = Logger.getLogger("reportsLogger");
 	private int place = 0;
 	private int carCount;
 
@@ -53,11 +54,11 @@ public class Race implements ThreadCompleteListener
 		place++;
 		if (place == 1)
 		{
-			log.info("WINNER!!!" + ((Car) car).getCarName());
+			resultLog.info("WINNER!!!" + ((Car) car).getCarName());
 		}
 		else
 		{
-			log.info(place + " place: " + ((Car) car).getCarName());
+			resultLog.info(place + " place: " + ((Car) car).getCarName());
 		}
 	}
 
