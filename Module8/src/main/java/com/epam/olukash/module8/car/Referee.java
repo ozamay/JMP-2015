@@ -36,11 +36,13 @@ public class Referee implements Runnable
 			if(threads != null && !threads.isEmpty())
 			{
 				Thread.sleep(TIME_FOR_DISQUALIFICATION);
+
 				Random generator = new Random();
 				int i = generator.nextInt(threads.size()-1);
-				resultLog.info(threads.get(i).getCarName() + " might be a cheater");
-				threads.get(i).interrupt();
-				resultLog.info("DISQUALIFICATION!!! " + threads.get(i).getCarName());
+				Car car = threads.get(i);
+				resultLog.info(car.getCarName() + " might be a cheater");
+				car.interrupt();
+				resultLog.info("DISQUALIFICATION!!! " + car.getCarName());
 			}
 		}
 		catch (InterruptedException e)
