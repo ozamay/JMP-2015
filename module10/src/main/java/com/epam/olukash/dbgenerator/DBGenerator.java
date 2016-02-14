@@ -8,9 +8,6 @@ import java.util.Random;
 import org.apache.log4j.Logger;
 
 import main.java.com.epam.olukash.dao.DAO;
-import main.java.com.epam.olukash.dao.util.DateUtil;
-import main.java.com.epam.olukash.dto.FriendShip;
-import main.java.com.epam.olukash.dto.Like;
 import main.java.com.epam.olukash.dto.Post;
 import main.java.com.epam.olukash.dto.User;
 
@@ -71,21 +68,6 @@ public class DBGenerator
 		}
 	}
 
-	private void fillFriendShipTables()
-	{
-		Random random = new Random();
-		for(int i = 1; i <= 70000; i++)
-		{
-			FriendShip friendShip = new FriendShip();
-			friendShip.setUserID1(random.nextInt(999)+1);
-			int id = random.nextInt(999)+1;
-			int userID2 = id != friendShip.getUserID1() ? id : (id+1);
-			friendShip.setUserID2(userID2 != 1001 ? userID2 : (userID2-2));
-
-			dao.createFriendShip(friendShip);
-		}
-	}
-
 	private void fillPostTables()
 	{
 		Random random = new Random();
@@ -98,19 +80,4 @@ public class DBGenerator
 			dao.createPost(post);
 		}
 	}
-
-	private void fillLikeTables()
-	{
-		Random random = new Random();
-		for(int i = 1; i <= 300000; i++)
-		{
-			Like like = new Like();
-			like.setUserID(random.nextInt(999)+1);
-			like.setPostID(random.nextInt(499)+1);
-			like.setCreateDate(DateUtil.getRandomDate("2015-01-01 00:00:00", "2016-01-01 00:00:00"));
-			dao.createLike(like);
-		}
-	}
-
-
 }
