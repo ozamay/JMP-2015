@@ -1,12 +1,18 @@
 package main.java.com.epam.olukash.dao;
 
-import static main.java.com.epam.olukash.dao.util.SQLConstants.*;
+import static main.java.com.epam.olukash.dao.util.SQLConstants.SQL_CREATE_FRIENDSHIP;
+import static main.java.com.epam.olukash.dao.util.SQLConstants.SQL_CREATE_LIKE;
+import static main.java.com.epam.olukash.dao.util.SQLConstants.SQL_CREATE_POST;
+import static main.java.com.epam.olukash.dao.util.SQLConstants.SQL_CREATE_USER;
+import static main.java.com.epam.olukash.dao.util.SQLConstants.SQL_GET_USER_BY_COUNT_OF_LIKES_AND_FRIENDS;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -19,11 +25,12 @@ import main.java.com.epam.olukash.dto.Post;
 import main.java.com.epam.olukash.dto.User;
 
 /**
- * @author Oleksii.Lukash
+ * @author Oleksii_Lukash
+ * @date 2/14/2016
  */
-public class DAO
+public class DAOm
 {
-	private static final Logger logger = Logger.getLogger(DAO.class);
+	private static final Logger logger = Logger.getLogger(DAOm.class);
 
 	public void executeStatement(String sqlQuery)
 	{
@@ -35,8 +42,6 @@ public class DAO
 
 			state = conn.prepareStatement(sqlQuery);
 			state.execute();
-
-			conn.setAutoCommit(true);
 		}
 		catch (SQLException e)
 		{
@@ -44,8 +49,8 @@ public class DAO
 		}
 		finally
 		{
-			ConnectionUtil.close(conn);
 			ConnectionUtil.close(state);
+			ConnectionUtil.close(conn);
 		}
 	}
 
@@ -72,8 +77,8 @@ public class DAO
 		}
 		finally
 		{
-			ConnectionUtil.close(conn);
 			ConnectionUtil.close(state);
+			ConnectionUtil.close(conn);
 		}
 	}
 
@@ -99,8 +104,8 @@ public class DAO
 		}
 		finally
 		{
-			ConnectionUtil.close(conn);
 			ConnectionUtil.close(state);
+			ConnectionUtil.close(conn);
 		}
 	}
 
@@ -153,8 +158,8 @@ public class DAO
 		}
 		finally
 		{
-			ConnectionUtil.close(conn);
 			ConnectionUtil.close(state);
+			ConnectionUtil.close(conn);
 		}
 	}
 
@@ -181,8 +186,8 @@ public class DAO
 		}
 		finally
 		{
-			ConnectionUtil.close(conn);
 			ConnectionUtil.close(state);
+			ConnectionUtil.close(conn);
 		}
 	}
 
@@ -208,8 +213,8 @@ public class DAO
 		}
 		finally
 		{
-			ConnectionUtil.close(conn);
 			ConnectionUtil.close(state);
+			ConnectionUtil.close(conn);
 		}
 	}
 
@@ -262,11 +267,11 @@ public class DAO
 		}
 	}
 
-	public LinkedList<User> getUserByFriendAndLikeCounts(int friendCount, int likeCount)
+	public List<User> getUserByFriendAndLikeCounts(int friendCount, int likeCount)
 	{
 		Connection conn = null;
 		PreparedStatement state = null;
-		LinkedList<User> users = new LinkedList<>();
+		ArrayList<User> users = new ArrayList<>();
 		try
 		{
 			conn = ConnectionUtil.getConnection();

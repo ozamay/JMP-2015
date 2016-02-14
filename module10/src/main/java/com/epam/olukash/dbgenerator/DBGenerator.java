@@ -7,7 +7,7 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 
-import main.java.com.epam.olukash.dao.DAO;
+import main.java.com.epam.olukash.dao.DAOm;
 import main.java.com.epam.olukash.dto.Post;
 import main.java.com.epam.olukash.dto.User;
 
@@ -18,21 +18,21 @@ public class DBGenerator
 {
 	private static final Logger logger = Logger.getLogger(DBGenerator.class);
 
-	private DAO dao;
+	private DAOm DAOm;
 	public DBGenerator()
 	{
-		dao = new DAO();
+		DAOm = new DAOm();
 	}
  	public void run()
 	{
 	 	dropTablesIfExist();
 		createTables();
 		fillUserTables();
-		dao.createFriendShip(70);
+		DAOm.createFriendShip(70);
 		fillPostTables();
-		dao.createLike(300);
+		DAOm.createLike(300);
 
-		List<User> users = dao.getUserByFriendAndLikeCounts(70, 100);
+		List<User> users = DAOm.getUserByFriendAndLikeCounts(70, 100);
 		for(User user : users)
 		{
 			logger.info(user.getUserName());
@@ -41,18 +41,18 @@ public class DBGenerator
 
 	private void dropTablesIfExist()
 	{
-		dao.executeStatement(SQL_DROP_USER);
-		dao.executeStatement(SQL_DROP_FRIENDSHIPS);
-		dao.executeStatement(SQL_DROP_LIKES);
-		dao.executeStatement(SQL_DROP_POSTS);
+		DAOm.executeStatement(SQL_DROP_USER);
+		DAOm.executeStatement(SQL_DROP_FRIENDSHIPS);
+		DAOm.executeStatement(SQL_DROP_LIKES);
+		DAOm.executeStatement(SQL_DROP_POSTS);
 	}
 
 	private void createTables()
 	{
-		dao.executeStatement(SQL_CREATE_TABLE_USER);
-		dao.executeStatement(SQL_CREATE_TABLE_FRIENDSHIPS);
-		dao.executeStatement(SQL_CREATE_TABLE_LIKES);
-		dao.executeStatement(SQL_CREATE_TABLE_POSTS);
+		DAOm.executeStatement(SQL_CREATE_TABLE_USER);
+		DAOm.executeStatement(SQL_CREATE_TABLE_FRIENDSHIPS);
+		DAOm.executeStatement(SQL_CREATE_TABLE_LIKES);
+		DAOm.executeStatement(SQL_CREATE_TABLE_POSTS);
 	}
 
 	private void fillUserTables()
@@ -64,7 +64,7 @@ public class DBGenerator
 			user.setUserName("userName" + i);
 			user.setUserSurName("surName" + i);
 
-			dao.createUser(user);
+			DAOm.createUser(user);
 		}
 	}
 
@@ -77,7 +77,7 @@ public class DBGenerator
 			post.setPostID(i);
 			post.setUserID(random.nextInt(999)+1);
 			post.setText("text");
-			dao.createPost(post);
+			DAOm.createPost(post);
 		}
 	}
 }
