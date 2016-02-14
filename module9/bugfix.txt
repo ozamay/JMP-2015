@@ -1,0 +1,19 @@
+﻿FindBug:
+1. Добавить к класу ProductList implements Serializable
+2. 41 строчку заменить на LinkedList<News> listNews = nmd.getLastNews(COUNTER_NEWS);
+3. С 39 строчки можно заменить на 		
+
+public int compare(Product product1, Product product2) {
+	Double price1 = product1.getPrice();
+	Double price2 = product2.getPrice();
+	return price1.compareTo(price2);
+
+4.59 строку стравнивать string с помощью equals
+5. 102 стоку заменить Integer.valueOf(prodID) на Integer.parseInt(prodID)
+
+CheckStyle:
+1. Строка 68, 80, 84 убрать 'page'
+2. private static final
+3. Убрать cast to int и = null;
+4. Убрать 47 строчку;
+5. 17 строка убрат каст с 17
