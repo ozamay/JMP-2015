@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 
@@ -14,21 +15,22 @@ import org.apache.log4j.Logger;
 public class ConnectionUtil
 {
 	private static final Logger logger = Logger.getLogger(ConnectionUtil.class);
+	private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("resources.database");
 
 	public static Connection getConnection()
 	{
 		try {
-			Class.forName ("oracle.jdbc.OracleDriver");
+			Class.forName (resourceBundle.getString("database.driver"));
 		} catch (ClassNotFoundException e) {
 			logger.error("ERROR: cannot load class " + e);
 		}
 
-		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+		String url = resourceBundle.getString("database.url");
 
 		//properties for creating connection to Oracle database
 		Properties props = new Properties();
-		props.setProperty("user", "olukash");
-		props.setProperty("password", "olukash");
+		props.setProperty("user", resourceBundle.getString("database.login"));
+		props.setProperty("password", resourceBundle.getString("database.password"));
 
 		Connection conn = null;
 		try

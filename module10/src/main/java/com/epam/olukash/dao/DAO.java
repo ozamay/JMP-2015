@@ -28,9 +28,10 @@ import main.java.com.epam.olukash.dto.User;
  * @author Oleksii_Lukash
  * @date 2/14/2016
  */
-public class DAOm
+public class DAO
 {
-	private static final Logger logger = Logger.getLogger(DAOm.class);
+	private static final Logger logger = Logger.getLogger(DAO.class);
+
 
 	public void executeStatement(String sqlQuery)
 	{
