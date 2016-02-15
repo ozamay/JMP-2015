@@ -238,7 +238,7 @@ public class DAO
 				{
 					state.setInt(1, random.nextInt(499) + 1);
 					state.setInt(2, random.nextInt(999) + 1);
-					state.setDate(3, new Date(DateUtil.getRandomDate("2015-01-01 00:00:00", "2016-01-01 00:00:00").getTime()));
+					state.setDate(3, new Date(DateUtil.getRandomDate(new java.util.Date(2015,01,01), new java.util.Date(2016,01,01)).getTime()));
 					state.addBatch();
 				}
 
