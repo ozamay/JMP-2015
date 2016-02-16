@@ -10,8 +10,7 @@ import org.apache.log4j.Logger;
 import main.java.com.epam.olukash.dao.util.ConnectionUtil;
 
 /**
- * @author Oleksii_Lukash
- * @date 2/14/2016
+ * @author Oleksii.Lukash
  */
 public class OtherDAO
 {

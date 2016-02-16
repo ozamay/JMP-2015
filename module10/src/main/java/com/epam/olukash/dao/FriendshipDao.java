@@ -16,26 +16,11 @@ import main.java.com.epam.olukash.dto.FriendShip;
  */
 public class FriendshipDao extends AbstractDAO<FriendShip>
 {
-	@Override
-	protected PreparedStatement getSaveStatement(Connection conn, FriendShip bean) throws SQLException
-	{
-		PreparedStatement state = conn.prepareStatement(SQL_CREATE_FRIENDSHIP);
-		populateStatement(state, bean);
-		return  state;
-	}
 
 	@Override
-	protected PreparedStatement getSaveStatementWithBatch(Connection conn, List<FriendShip> beans) throws SQLException
+	protected String getSaveSql()
 	{
-		PreparedStatement state = conn.prepareStatement(SQL_CREATE_FRIENDSHIP);
-
-		for(FriendShip friendShip : beans)
-		{
-			populateStatement(state, friendShip);
-			state.addBatch();
-		}
-
-		return state;
+		return SQL_CREATE_FRIENDSHIP;
 	}
 
 	@Override

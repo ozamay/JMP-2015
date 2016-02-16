@@ -23,28 +23,6 @@ public class UserDao extends AbstractDAO<User>
 {
 	private static final Logger logger = Logger.getLogger(OtherDAO.class);
 
-	@Override
-	protected PreparedStatement getSaveStatement(Connection conn, User user) throws SQLException
-	{
-		PreparedStatement state = conn.prepareStatement(SQL_CREATE_USER);
-		populateStatement(state, user);
-		return state;
-	}
-
-	@Override
-	protected PreparedStatement getSaveStatementWithBatch(Connection conn, List<User> beans) throws SQLException
-	{
-		PreparedStatement state = conn.prepareStatement(SQL_CREATE_USER);
-
-		for(User user : beans)
-		{
-			populateStatement(state, user);
-			state.addBatch();
-		}
-
-		return state;
-	}
-
 	public List<User> getUserByFriendAndLikeCounts(int friendCount, int likeCount)
 	{
 		Connection conn = null;
@@ -75,6 +53,12 @@ public class UserDao extends AbstractDAO<User>
 		}
 
 		return users;
+	}
+
+	@Override
+	protected String getSaveSql()
+	{
+		return SQL_CREATE_USER;
 	}
 
 	@Override

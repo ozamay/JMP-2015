@@ -24,7 +24,8 @@ public abstract class AbstractDAO<T>
 		try
 		{
 			conn = ConnectionUtil.getConnection();
-			state = getSaveStatement(conn, bean);
+			state = conn.prepareStatement(getSaveSql());
+			populateStatement(state, bean);
 			state.execute();
 		}
 		catch (SQLException e)
@@ -46,8 +47,13 @@ public abstract class AbstractDAO<T>
 		{
 			conn = ConnectionUtil.getConnection();
 			conn.setAutoCommit(false);
-			state = getSaveStatementWithBatch(conn, beans);
-			state.executeBatch();
+
+			state = conn.prepareStatement(getSaveSql());
+			for(T bean : beans)
+			{
+				populateStatement(state, bean);
+				state.addBatch();
+			}
 			conn.commit();
 		}
 		catch (SQLException e)
@@ -61,9 +67,7 @@ public abstract class AbstractDAO<T>
 		}
 	}
 
-	protected abstract PreparedStatement getSaveStatement(Connection conn, T bean) throws SQLException;
-
-	protected abstract PreparedStatement getSaveStatementWithBatch(Connection conn, List<T> beans) throws SQLException;
+	protected abstract String getSaveSql();
 
 	protected abstract void populateStatement(PreparedStatement state, T bean) throws SQLException;
 
