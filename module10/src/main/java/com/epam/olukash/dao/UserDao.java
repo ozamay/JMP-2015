@@ -27,12 +27,7 @@ public class UserDao extends AbstractDAO<User>
 	protected PreparedStatement getSaveStatement(Connection conn, User user) throws SQLException
 	{
 		PreparedStatement state = conn.prepareStatement(SQL_CREATE_USER);
-
-		state.setInt(1, user.getUserID());
-		state.setString(2, user.getUserName());
-		state.setString(3, user.getUserSurName());
-		state.setDate(4, new Date(System.currentTimeMillis()));
-
+		populateStatement(state, user);
 		return state;
 	}
 
@@ -43,10 +38,7 @@ public class UserDao extends AbstractDAO<User>
 
 		for(User user : beans)
 		{
-			state.setInt(1, user.getUserID());
-			state.setString(2, user.getUserName());
-			state.setString(3, user.getUserSurName());
-			state.setDate(4, new Date(System.currentTimeMillis()));
+			populateStatement(state, user);
 			state.addBatch();
 		}
 
@@ -69,12 +61,7 @@ public class UserDao extends AbstractDAO<User>
 			ResultSet rs = state.executeQuery();
 
 			while (rs.next()) {
-				User user = new User();
-				user.setUserID(rs.getInt(1));
-				user.setUserName(rs.getString(2));
-				user.setUserSurName(rs.getString(3));
-				user.setBirthDay(new Date(rs.getDate(4).getTime()));
-				users.add(user);
+				users.add(populateBean(rs));
 			}
 		}
 		catch (SQLException e)
@@ -88,5 +75,26 @@ public class UserDao extends AbstractDAO<User>
 		}
 
 		return users;
+	}
+
+	@Override
+	protected void populateStatement(PreparedStatement state, User bean) throws SQLException
+	{
+		state.setInt(1, bean.getUserID());
+		state.setString(2, bean.getUserName());
+		state.setString(3, bean.getUserSurName());
+		state.setDate(4, new Date(System.currentTimeMillis()));
+	}
+
+	@Override
+	protected User populateBean(ResultSet rs) throws SQLException
+	{
+		User user = new User();
+		user.setUserID(rs.getInt(1));
+		user.setUserName(rs.getString(2));
+		user.setUserSurName(rs.getString(3));
+		user.setBirthDay(new Date(rs.getDate(4).getTime()));
+
+		return user;
 	}
 }

@@ -25,7 +25,6 @@ public class OtherDAO
 		try
 		{
 			conn = ConnectionUtil.getConnection();
-
 			state = conn.prepareStatement(sqlQuery);
 			state.execute();
 		}

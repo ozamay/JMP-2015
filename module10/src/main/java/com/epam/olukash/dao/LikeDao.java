@@ -5,6 +5,7 @@ import static main.java.com.epam.olukash.dao.util.SQLConstants.SQL_CREATE_LIKE;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,11 +19,7 @@ public class LikeDao extends AbstractDAO<Like>
 	protected PreparedStatement getSaveStatement(Connection conn, Like like) throws SQLException
 	{
 		PreparedStatement state = conn.prepareStatement(SQL_CREATE_LIKE);
-
-		state.setInt(1, like.getPostID());
-		state.setInt(2, like.getUserID());
-		state.setDate(3, new Date(like.getCreateDate().getTime()));
-
+		populateStatement(state, like);
 		return state;
 	}
 
@@ -33,12 +30,24 @@ public class LikeDao extends AbstractDAO<Like>
 
 		for(Like like : beans)
 		{
-			state.setInt(1, like.getPostID());
-			state.setInt(2, like.getUserID());
-			state.setDate(3, new Date(like.getCreateDate().getTime()));
+			populateStatement(state, like);
 			state.addBatch();
 		}
 
 		return state;
+	}
+
+	@Override
+	protected void populateStatement(PreparedStatement state, Like bean) throws SQLException
+	{
+		state.setInt(1, bean.getPostID());
+		state.setInt(2, bean.getUserID());
+		state.setDate(3, new Date(bean.getCreateDate().getTime()));
+	}
+
+	@Override
+	protected Like populateBean(ResultSet rs) throws SQLException
+	{
+		return null;
 	}
 }

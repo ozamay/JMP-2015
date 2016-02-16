@@ -2,6 +2,7 @@ package main.java.com.epam.olukash.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -63,4 +64,8 @@ public abstract class AbstractDAO<T>
 	protected abstract PreparedStatement getSaveStatement(Connection conn, T bean) throws SQLException;
 
 	protected abstract PreparedStatement getSaveStatementWithBatch(Connection conn, List<T> beans) throws SQLException;
+
+	protected abstract void populateStatement(PreparedStatement state, T bean) throws SQLException;
+
+	protected abstract T populateBean(ResultSet rs) throws SQLException;
 }

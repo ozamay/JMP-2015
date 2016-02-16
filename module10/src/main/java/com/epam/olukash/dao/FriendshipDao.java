@@ -5,6 +5,7 @@ import static main.java.com.epam.olukash.dao.util.SQLConstants.SQL_CREATE_FRIEND
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,10 +20,7 @@ public class FriendshipDao extends AbstractDAO<FriendShip>
 	protected PreparedStatement getSaveStatement(Connection conn, FriendShip bean) throws SQLException
 	{
 		PreparedStatement state = conn.prepareStatement(SQL_CREATE_FRIENDSHIP);
-
-		state.setInt(1, bean.getUserID1());
-		state.setInt(2, bean.getUserID2());
-		state.setDate(3, new Date(System.currentTimeMillis()));
+		populateStatement(state, bean);
 		return  state;
 	}
 
@@ -33,12 +31,24 @@ public class FriendshipDao extends AbstractDAO<FriendShip>
 
 		for(FriendShip friendShip : beans)
 		{
-			state.setInt(1, friendShip.getUserID1());
-			state.setInt(2, friendShip.getUserID2());
-			state.setDate(3, new Date(friendShip.getCreatedDate().getTime()));
+			populateStatement(state, friendShip);
 			state.addBatch();
 		}
 
 		return state;
+	}
+
+	@Override
+	protected void populateStatement(PreparedStatement state, FriendShip bean) throws SQLException
+	{
+		state.setInt(1, bean.getUserID1());
+		state.setInt(2, bean.getUserID2());
+		state.setDate(3, new Date(bean.getCreatedDate().getTime()));
+	}
+
+	@Override
+	protected FriendShip populateBean(ResultSet rs) throws SQLException
+	{
+		return null;
 	}
 }
