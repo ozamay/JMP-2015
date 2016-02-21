@@ -1,0 +1,73 @@
+package com.epam.olukash.dao.util;
+
+/**
+ * @author Oleksii.Lukash
+ */
+public class SQLConstants
+{
+	// Create table
+	public static final String SQL_CREATE_TABLE_USER = "CREATE TABLE APP_USER (USERID NUMBER NOT NULL, "
+			+ "  USERNAME NVARCHAR2(100) NOT NULL, USERSURNAME NVARCHAR2(100) NOT NULL, BIRTHDAY TIMESTAMP NOT NULL)";
+	public static final String SQL_CREATE_TABLE_FRIENDSHIP  = "CREATE TABLE APP_FRIENDSHIP (FRIENDSHIPID NUMBER NOT NULL, USERID1 NUMBER NOT NULL, "
+			+ " USERID2 NUMBER NOT NULL, CREATEDATE TIMESTAMP NOT NULL )";
+	public static final String SQL_CREATE_TABLE_LIKE  = "CREATE TABLE APP_LIKE (LIKEID NUMBER NOT NULL, POSTID NUMBER NOT NULL, "
+			+ " USERID NUMBER NOT NULL, CREATEDATE TIMESTAMP NOT NULL )";
+	public static final String SQL_CREATE_TABLE_POSTS  = "CREATE TABLE APP_POST (POSTID NUMBER NOT NULL, "
+			+ " USERID NUMBER NOT NULL, POSTTEXT NVARCHAR2(100) NOT NULL, CREATEDATE TIMESTAMP NOT NULL )";
+
+	// Drop table
+	public static final String SQL_DROP_POSTS  = "DECLARE cnt int; BEGIN SELECT COUNT(*) INTO cnt FROM user_tables WHERE table_name = 'APP_POST'; "
+			+ "  IF cnt > 0 THEN EXECUTE IMMEDIATE 'DROP TABLE APP_POST'; END IF; END;";
+	public static final String SQL_DROP_LIKES  = "DECLARE cnt int; BEGIN SELECT COUNT(*) INTO cnt FROM user_tables WHERE table_name = 'APP_LIKE'; "
+			+ "  IF cnt > 0 THEN EXECUTE IMMEDIATE 'DROP TABLE APP_LIKE'; END IF; END;";
+	public static final String SQL_DROP_USER  = "DECLARE cnt int; BEGIN SELECT COUNT(*) INTO cnt FROM user_tables WHERE table_name = 'APP_USER'; "
+			+ "  IF cnt > 0 THEN EXECUTE IMMEDIATE 'DROP TABLE APP_USER'; END IF; END;";
+	public static final String SQL_DROP_FRIENDSHIPS  = "DECLARE cnt int; BEGIN SELECT COUNT(*) INTO cnt FROM user_tables WHERE table_name = 'APP_FRIENDSHIP'; "
+			+ "  IF cnt > 0 THEN EXECUTE IMMEDIATE 'DROP TABLE APP_FRIENDSHIP'; END IF; END;";
+
+	// Insert
+	public static final String SQL_CREATE_USER = "INSERT INTO APP_USER (USERID, USERNAME, USERSURNAME, BIRTHDAY) VALUES (?, ?, ?, ?)";
+	public static final String SQL_CREATE_FRIENDSHIP = "INSERT INTO APP_FRIENDSHIP (FRIENDSHIPID, USERID1, USERID2, CREATEDATE) VALUES (?, ?, ?, ?)";
+	public static final String SQL_CREATE_POST = "INSERT INTO APP_POSTS (POSTID, USERID, POSTTEXT, CREATEDATE) VALUES (?, ?, ?, ?)";
+	public static final String SQL_CREATE_LIKE = "INSERT INTO APP_LIKE (LIKEID, POSTID, USERID, CREATEDATE) VALUES (?, ?, ?, ?)";
+
+	// Find
+	public static final String SQL_SELECT_USER = "SELECT USERID, USERNAME, USERSURNAME, BIRTHDAY FROM APP_USER WHERE USERID = ?";
+	public static final String SQL_SELECT_FRIENDSHIP = "SELECT FRIENDSHIPID, USERID1, USERID2, CREATEDATE FROM APP_FRIENDSHIP WHERE FRIENDSHIPID = ?";
+	public static final String SQL_SELECT_POST = "SELECT POSTID, USERID, POSTTEXT, CREATEDATE FROM APP_POSTS WHERE POSTID = ?";
+	public static final String SQL_SELECT_LIKE = "SELECT LIKEID, POSTID, USERID, CREATEDATE FROM APP_LIKE WHERE LIKEID = ?";
+
+	// Find ALL
+	public static final String SQL_GET_ALl_USERS = "SELECT USERID, USERNAME, USERSURNAME, BIRTHDAY FROM APP_USER";
+	public static final String SQL_GET_ALl_FRIENDSHIPS = "SELECT FRIENDSHIPID, USERID1, USERID2, CREATEDATE FROM APP_FRIENDSHIP";
+	public static final String SQL_GET_ALl_POSTS = "SELECT POSTID, USERID, POSTTEXT, CREATEDATE FROM APP_POSTS";
+	public static final String SQL_GET_ALl_LIKES = "SELECT LIKEID, POSTID, USERID, CREATEDATE FROM APP_LIKE";
+
+	// Remove
+	public static final String SQL_REMOVE_USER = "DELETE FROM APP_USER WHERE USERID = ?";
+	public static final String SQL_REMOVE_FRIENDSHIP = "DELETE FROM APP_FRIENDSHIP WHERE FRIENDSHIPID = ?";
+	public static final String SQL_REMOVE_POST = "DELETE FROM APP_POSTS WHERE POSTID = ?";
+	public static final String SQL_REMOVE_LIKE = "DELETE FROM APP_LIKE WHERE LIKEID = ?";
+
+	// Other queries
+	public static final String SQL_GET_USER_BY_COUNT_OF_LIKES_AND_FRIENDS =
+			"WITH counts as "
+					+ "("
+					+ "  SELECT"
+					+ "      u.USERID as USERID,"
+					+ "      (SELECT COUNT(*) FROM APP_FRIENDSHIP fs WHERE fs.USERID1 = u.USERID) as friendCount,"
+					+ "      (SELECT COUNT(*) FROM APP_LIKE l INNER JOIN POSTS p ON p.POSTID = l.POSTID WHERE p.USERID = u.USERID) as likeCount"
+					+ "  FROM "
+					+ "      APP_USER u"
+					+ ")"
+					+ "SELECT  "
+					+ "      u.USERID,"
+					+ "      u.USERNAME,"
+					+ "      u.USERSURNAME,"
+					+ "      u.BIRTHDAY "
+					+ "FROM "
+					+ "      APP_USER u INNER JOIN counts c on c.USERID = u.USERID "
+					+ "WHERE"
+					+ "      c.friendCount > ?"
+					+ "      AND c.likeCount > ?";
+}
