@@ -9,32 +9,26 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>dao-layer</artifactId>
+	<name>module11-dao</name>
 
 	<properties>
 		<log4j-version>1.2.17</log4j-version>
-		<spring.version>4.1.6.RELEASE</spring.version>
+		<spring-version>4.1.6.RELEASE</spring-version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>${log4j-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>${spring.version}</version>
+			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.springtestdbunit</groupId>
@@ -45,19 +39,11 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-core</artifactId>
-			<version>3.2.0</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
+			<version>${spring-version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -77,11 +63,12 @@
 			<artifactId>spring-test-dbunit</artifactId>
 			<version>1.2.1</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.16</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>junit</artifactId>
+					<groupId>junit</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 </project>
