@@ -22,7 +22,7 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
  * @author Oleksii.Lukash
  */
 
-public class UserDAOTest
+public class UserDAOtest
 {
 	@Autowired
 	private UserDAO userDAO;
