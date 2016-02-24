@@ -11,6 +11,11 @@
 	<artifactId>dao-layer</artifactId>
 	<name>module11-dao</name>
 
+	<properties>
+		<spring-test-dbunit-version>1.2.1</spring-test-dbunit-version>
+		<dbunit-version>2.5.0</dbunit-version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -26,12 +31,6 @@
 			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.springtestdbunit</groupId>
-			<artifactId>spring-test-dbunit</artifactId>
-			<version>1.0.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
@@ -44,7 +43,7 @@
 		<dependency>
 			<groupId>org.dbunit</groupId>
 			<artifactId>dbunit</artifactId>
-			<version>2.5.0</version>
+			<version>${dbunit-version}</version>
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
@@ -56,7 +55,7 @@
 		<dependency>
 			<groupId>com.github.springtestdbunit</groupId>
 			<artifactId>spring-test-dbunit</artifactId>
-			<version>1.2.1</version>
+			<version>${spring-test-dbunit-version}</version>
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
