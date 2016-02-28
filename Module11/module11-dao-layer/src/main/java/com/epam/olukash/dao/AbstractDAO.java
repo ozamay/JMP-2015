@@ -19,7 +19,7 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
  */
 public abstract class AbstractDAO<T>
 {
-	private static final Logger logger = Logger.getLogger(OtherDAO.class);
+	private static final Logger logger = Logger.getLogger(AbstractDAO.class);
 
 	@Autowired
 	protected DataSource dataSource;
