@@ -21,44 +21,50 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 /**
  * @author Oleksii.Lukash
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:test-beans.xml")
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+		DbUnitTestExecutionListener.class })
+@DatabaseSetup("classpath:postSampleData.xml")
 public class PostDAOTest
 {
-//	@Autowired
-//	private PostDAO postDAO;
-//
-//	@Test
-//	public void testSave() throws Exception
-//	{
-//		Post post = new Post();
-//		post.setId(3);
-//		post.setUserID(1);
-//		post.setText("test3");
-//		post.setCreatedDate(new Date(2015,01,01));
-//		postDAO.save(post);
-//		assertEquals(post, postDAO.find(3));
-//	}
-//
-//	@Test
-//	@DatabaseSetup("classpath:postSampleData.xml")
-//	public void testFind() throws Exception
-//	{
-//		Post post = postDAO.find(1);
-//		assertEquals(1, post.getId());
-//		assertEquals(1, post.getUserID());
-//	}
-//
-//	@Test
-//	@DatabaseSetup("classpath:postSampleData.xml")
-//	public void testFindAll() throws Exception
-//	{
-//		assertEquals(2, postDAO.findAll().size());
-//	}
-//
-//	@Test
-//	@DatabaseSetup("classpath:postSampleData.xml")
-//	public void testRemove() throws Exception
-//	{
-//		postDAO.remove(1);
-//		assertNull(null, postDAO.find(1));
-//	}
+	@Autowired
+	private PostDAO postDAO;
+
+	@Test
+	public void testSave() throws Exception
+	{
+		Post post = new Post();
+		post.setId(3);
+		post.setUserID(1);
+		post.setText("test3");
+		post.setCreatedDate(new Date(2015,01,01));
+		postDAO.save(post);
+
+		Post savedPost = postDAO.find(3);
+		assertEquals(savedPost.getId(), 3);
+		assertEquals(savedPost.getUserID(), 1);
+		assertEquals(savedPost.getText(), "test3");
+	}
+
+	@Test
+	public void testFind() throws Exception
+	{
+		Post post = postDAO.find(2);
+		assertEquals(2, post.getId());
+		assertEquals(2, post.getUserID());
+	}
+
+	@Test
+	public void testFindAll() throws Exception
+	{
+		assertEquals(2, postDAO.findAll().size());
+	}
+
+	@Test
+	public void testRemove() throws Exception
+	{
+		postDAO.remove(1);
+		assertNull(null, postDAO.find(1));
+	}
 }

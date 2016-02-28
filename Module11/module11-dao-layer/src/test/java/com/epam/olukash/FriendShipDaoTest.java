@@ -25,13 +25,13 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 @ContextConfiguration(locations = "classpath:test-beans.xml")
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
 		DbUnitTestExecutionListener.class})
+@DatabaseSetup("classpath:friendshipSampleData.xml")
 public class FriendShipDaoTest
 {
 	@Autowired
 	private FriendshipDAO dao;
 
 	@Test
-	@DatabaseSetup("classpath:friendshipSampleData.xml")
 	public void testSave() throws Exception
 	{
 		FriendShip friendShip = new FriendShip();
@@ -44,7 +44,6 @@ public class FriendShipDaoTest
 	}
 
 	@Test
-	@DatabaseSetup("classpath:friendshipSampleData.xml")
 	public void testFind() throws Exception
 	{
 		FriendShip friendShip = dao.find(1);
@@ -53,14 +52,12 @@ public class FriendShipDaoTest
 	}
 
 	@Test
-	@DatabaseSetup("classpath:friendshipSampleData.xml")
 	public void testFindAll() throws Exception
 	{
 		assertEquals(2, dao.findAll().size());
 	}
 
 	@Test
-	@DatabaseSetup("classpath:friendshipSampleData.xml")
 	public void testRemove() throws Exception
 	{
 		dao.remove(1);

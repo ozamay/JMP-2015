@@ -3,6 +3,7 @@ package com.epam.olukash.manager;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.GenericTypeResolver;
 
 import com.epam.olukash.dao.AbstractDAO;
 import com.epam.olukash.dto.AbstractBean;

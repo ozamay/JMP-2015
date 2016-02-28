@@ -25,13 +25,13 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 @ContextConfiguration(locations = "classpath:test-beans.xml")
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
 		DbUnitTestExecutionListener.class})
+@DatabaseSetup("classpath:likeSampleData.xml")
 public class LikeDAOTest
 {
 	@Autowired
 	private LikeDAO likeDAO;
 
 	@Test
-	@DatabaseSetup("classpath:likeSampleData.xml")
 	public void testSave() throws Exception
 	{
 		Like like = new Like();
@@ -44,7 +44,6 @@ public class LikeDAOTest
 	}
 
 	@Test
-	@DatabaseSetup("classpath:likeSampleData.xml")
 	public void testFind() throws Exception
 	{
 		Like like = likeDAO.find(1);
@@ -53,14 +52,12 @@ public class LikeDAOTest
 	}
 
 	@Test
-	@DatabaseSetup("classpath:likeSampleData.xml")
 	public void testFindAll() throws Exception
 	{
 		assertEquals(2, likeDAO.findAll().size());
 	}
 
 	@Test
-	@DatabaseSetup("classpath:likeSampleData.xml")
 	public void testRemove() throws Exception
 	{
 		likeDAO.remove(1);
