@@ -19,6 +19,12 @@ public class BankTest {
     }
 
     @Test
+    public void testFormat()
+    {
+
+    }
+
+    @Test
     public void checkingAccount() {
         Account checkingAccount = new Account(Account.SAVINGS);
         stubForCheckingAccount(checkingAccount);
