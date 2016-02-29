@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<app_user userid="1" username="Mr" usersurname="Dave" birthday="1998-12-25"/>
+	<app_user userid="2" username="Mrs" usersurname="Jane" birthday="1998-12-25"/>
+</dataset>
