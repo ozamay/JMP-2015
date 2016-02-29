@@ -76,8 +76,7 @@ public class AccountTest
 	public void testInterestEarned_checkingAccount()
 	{
 		Account account = new Account(Account.CHECKING);
-		double interestEarned = account.interestEarned();
-		assertEquals(interestEarned, 0.0);
+		assertEquals(account.interestEarned(), 0.0);
 	}
 
 	@Test
@@ -85,8 +84,7 @@ public class AccountTest
 	{
 		Account account = new Account(Account.CHECKING);
 		account.deposit(DEFAULT_AMOUNT);
-		double interestEarned = account.interestEarned();
-		assertEquals(interestEarned, DEFAULT_AMOUNT*CHECKING_INTERESTRATE);
+		assertEquals(account.interestEarned(), DEFAULT_AMOUNT*CHECKING_INTERESTRATE);
 	}
 
 	@Test
@@ -94,8 +92,7 @@ public class AccountTest
 	{
 		Account account = new Account(Account.SAVINGS);
 		account.deposit(DEFAULT_AMOUNT);
-		double interestEarned = account.interestEarned();
-		assertEquals(interestEarned, DEFAULT_AMOUNT*SAVINGS_INTERESTRATE);
+		assertEquals(account.interestEarned(), DEFAULT_AMOUNT*SAVINGS_INTERESTRATE);
 	}
 
 	@Test
@@ -103,16 +100,14 @@ public class AccountTest
 	{
 		Account account = new Account(Account.SAVINGS);
 		account.deposit(AMOUNT_2000);
-		double interestEarned = account.interestEarned();
-		assertEquals(interestEarned, 1+(AMOUNT_2000 - 1000)*SAVINGS_INTERESTRATE_GREATER);
+		assertEquals(account.interestEarned(), 1+(AMOUNT_2000 - 1000)*SAVINGS_INTERESTRATE_GREATER);
 	}
 
 	@Test
 	public void testInterestEarned__savingAccountWithoutAmount()
 	{
 		Account account = new Account(Account.SAVINGS);
-		double interestEarned = account.interestEarned();
-		assertEquals(interestEarned, 0.0);
+		assertEquals(account.interestEarned(), 0.0);
 	}
 
 	@Test
@@ -120,8 +115,7 @@ public class AccountTest
 	{
 		Account account = new Account(Account.MAXI_SAVINGS);
 		account.deposit(DEFAULT_AMOUNT);
-		double interestEarned = account.interestEarned();
-		assertEquals(interestEarned, DEFAULT_AMOUNT*MAXI_SAVINGS_INTERESTRATE);
+		assertEquals(account.interestEarned(), DEFAULT_AMOUNT*MAXI_SAVINGS_INTERESTRATE);
 	}
 
 	@Test
@@ -129,8 +123,7 @@ public class AccountTest
 	{
 		Account account = new Account(Account.MAXI_SAVINGS);
 		account.deposit(AMOUNT_2000);
-		double interestEarned = account.interestEarned();
-		assertEquals(interestEarned, 20+(AMOUNT_2000 - 1000)*MAXI_SAVINGS_INTERESTRATE_GREATER_1000);
+		assertEquals(account.interestEarned(), 20+(AMOUNT_2000 - 1000)*MAXI_SAVINGS_INTERESTRATE_GREATER_1000);
 	}
 
 	@Test
@@ -138,16 +131,14 @@ public class AccountTest
 	{
 		Account account = new Account(Account.MAXI_SAVINGS);
 		account.deposit(AMOUNT_2001);
-		double interestEarned = account.interestEarned();
-		assertEquals(interestEarned, 70+(AMOUNT_2001 - 2000)*MAXI_SAVINGS_INTERESTRATE_GREATER_2000);
+		assertEquals(account.interestEarned(), 70+(AMOUNT_2001 - 2000)*MAXI_SAVINGS_INTERESTRATE_GREATER_2000);
 	}
 
 	@Test
 	public void testInterestEarned__maxisavingAccountWithoutAmount()
 	{
 		Account account = new Account(Account.MAXI_SAVINGS);
-		double interestEarned = account.interestEarned();
-		assertEquals(interestEarned, 0.0);
+		assertEquals(account.interestEarned(), 0.0);
 	}
 
 	////////////////// Test sumTransactions
