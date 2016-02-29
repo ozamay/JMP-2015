@@ -56,7 +56,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testStatementForAccount()
+    public void testStatementForAccount_olukash()
     {
         Customer oscar = new Customer("Oscar");
         Account account = new Account(Account.MAXI_SAVINGS);

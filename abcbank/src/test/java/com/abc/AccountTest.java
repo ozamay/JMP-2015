@@ -21,8 +21,7 @@ public class AccountTest
 	public static final double AMOUNT_2001 = 2001;
 
 	////////////////// Test deposit
-
-
+	///All test olukash
 	@Test
 	public void testDeposit()
 	{
