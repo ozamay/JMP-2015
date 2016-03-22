@@ -14,6 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.springframework.http.MediaType;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
@@ -24,7 +26,8 @@ import com.sun.jersey.multipart.FormDataParam;
 @Path("/logo")
 public class LogoManagementService
 {
-	public static final String UPLOAD_FILE_SERVER = "D:/demo/upload/";
+	private static final Logger logger = Logger.getLogger(LogoManagementService.class);
+	private static final String UPLOAD_FILE_SERVER = "D:/demo/upload/";
 
 	@GET
 	@Path("/download/image")
@@ -38,30 +41,6 @@ public class LogoManagementService
 		return responseBuilder.build();
 	}
 
-	private String writeToFileServer(InputStream inputStream, String fileName) throws IOException {
-
-		OutputStream outputStream = null;
-		String qualifiedUploadFilePath = UPLOAD_FILE_SERVER + fileName;
-
-		try {
-			outputStream = new FileOutputStream(new File(qualifiedUploadFilePath));
-			int read;
-			byte[] bytes = new byte[1024];
-			while ((read = inputStream.read(bytes)) != -1) {
-				outputStream.write(bytes, 0, read);
-			}
-			outputStream.flush();
-		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-		finally{
-			outputStream.close();
-		}
-		return qualifiedUploadFilePath;
-	}
-
-
 	@POST
 	@Path("/upload/images")
 	@Consumes(MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -69,17 +48,27 @@ public class LogoManagementService
 			@FormDataParam("file") InputStream fileInputStream,
 			@FormDataParam("file") FormDataContentDisposition fileFormDataContentDisposition) {
 
-		String fileName;
-		String uploadFilePath = null;
+		String fileName = fileFormDataContentDisposition.getFileName();
+		String uploadFilePath = writeToFileServer(fileInputStream, fileName);
 
-		try {
-			fileName = fileFormDataContentDisposition.getFileName();
-			uploadFilePath = writeToFileServer(fileInputStream, fileName);
-		}
-		catch(IOException ioe){
-			ioe.printStackTrace();
-		}
 		return Response.ok("File uploaded successfully at " + uploadFilePath).build();
+	}
+
+	private String writeToFileServer(InputStream inputStream, String fileName) {
+
+		OutputStream outputStream = null;
+		String qualifiedUploadFilePath = UPLOAD_FILE_SERVER + fileName;
+		try {
+			outputStream = new FileOutputStream(new File(qualifiedUploadFilePath));
+			IOUtils.copy(inputStream, outputStream);
+		}
+		catch (IOException ioe) {
+			logger.error(ioe);
+		}
+		finally{
+			IOUtils.closeQuietly(outputStream);
+		}
+		return qualifiedUploadFilePath;
 	}
 
 }

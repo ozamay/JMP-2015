@@ -8,6 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -18,8 +19,10 @@ import com.epam.olukash.bean.User;
  * @author Oleksii_Lukash
  */
 @Path("/users")
-public class UserManagmentService
+public class UserManagementService
 {
+	private static final Logger logger = Logger.getLogger(UserManagementService.class);
+
 	@GET
 	@Path("/{userID}")
 	@Produces(MediaType.APPLICATION_JSON_VALUE)
@@ -40,24 +43,24 @@ public class UserManagmentService
 	@ResponseStatus(value= HttpStatus.CREATED)
 	public void createUser(User user)
 	{
-	  System.out.println(user.toString());
-	  System.out.println("User with ID created");
+		logger.info(user.toString());
+		logger.info("User with ID created");
 	}
 
 	@PUT
 	@Path("/{userID}")
 	@Produces(MediaType.APPLICATION_JSON_VALUE)
-	public void updateActor(User user, @PathParam("userID") long userID)
+	public void updateUser(User user, @PathParam("userID") long userID)
 	{
-		System.out.println(user.toString());
-		System.out.println("User with ID updated " + userID);
+		logger.info(user.toString());
+		logger.info("User with ID updated " + userID);
 	}
 
 	@DELETE
 	@Path("/{userID}")
 	@Produces(MediaType.APPLICATION_JSON_VALUE)
-	public void deleteActor(@PathParam("userID") long userID)
+	public void deleteUser(@PathParam("userID") long userID)
 	{
-		System.out.println("User with ID deleted: " + userID);
+		logger.info("User with ID deleted: " + userID);
 	}
 }
