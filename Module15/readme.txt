@@ -3,17 +3,10 @@
 - Create user: //localhost:8080/users, method post (xml type supported).
 add in request body
 <user>
-    
-	<userID>1</userID>
-    
 	<lastName>Lukash</lastName>
-    
 	<login>Login</login>
-    
 	<email>Email</email>
-    
 	<name>Oleksii</name>
-
 </user>
 - update user: //localhost:8080/users, method put (json type supported).
 add in request body

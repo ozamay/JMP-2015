@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,34 +40,27 @@ public class UserManagementService
 	private static final Logger logger = Logger.getLogger(UserManagementService.class);
 	private Map<Long, User> users = new HashMap<Long, User>();
 	private Map<Long, Integer> fileIdCounters = new HashMap<Long, Integer>();
-	private int userCounter;
 
 	@GET
 	@Path("/{userID}")
 	@Produces(MediaType.APPLICATION_JSON_VALUE)
 	public User getUser(@PathParam("userID") long userID)
 	{
-		User user = new User();
-		user.setUserID(userID);
-		user.setName("Oleksii");
-		user.setLastName("Lukash");
-		user.setEmail("email");
-		user.setLogin("login");
 		return users.get(userID);
 	}
 
 	@POST
 	@Path("")
-	@Produces(MediaType.APPLICATION_XML_VALUE)
+	@Consumes(MediaType.APPLICATION_XML_VALUE)
 	@ResponseStatus(value= HttpStatus.CREATED)
-	public void createUser(User user)
+	public Response createUser(User user)
 	{
-		userCounter++;
-		user.setUserID(userCounter);
+		user.setUserID(users.isEmpty() ? 1 : Collections.max(users.keySet()) + 1);
 		users.put(user.getUserID(), user);
 
 		logger.info(user.toString());
 		logger.info("User with ID created");
+		return Response.ok("Created user with ID " + user.getUserID()).build();
 	}
 
 	@PUT
