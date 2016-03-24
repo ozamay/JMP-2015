@@ -27,5 +27,5 @@ add in request body
 - delete user: http://localhost:8080/users/1, method delete
 
 2. Test upload/download
-1. Upload logo: http://localhost:8080/uploadImageFile.jsp
-2. Dowload logo:http://localhost:8080/logo/download/image 
+1. Upload logo: http://localhost:8080/users/1/download/1
+2. Download logo:http://localhost:8080/users/1/upload
