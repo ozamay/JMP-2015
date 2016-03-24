@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -17,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -34,6 +37,9 @@ import com.sun.jersey.multipart.FormDataParam;
 public class UserManagementService
 {
 	private static final Logger logger = Logger.getLogger(UserManagementService.class);
+	private Map<Long, User> users = new HashMap<Long, User>();
+	private Map<Long, Integer> fileIdCounters = new HashMap<Long, Integer>();
+	private int userCounter;
 
 	@GET
 	@Path("/{userID}")
@@ -46,7 +52,7 @@ public class UserManagementService
 		user.setLastName("Lukash");
 		user.setEmail("email");
 		user.setLogin("login");
-		return user;
+		return users.get(userID);
 	}
 
 	@POST
@@ -55,6 +61,10 @@ public class UserManagementService
 	@ResponseStatus(value= HttpStatus.CREATED)
 	public void createUser(User user)
 	{
+		userCounter++;
+		user.setUserID(userCounter);
+		users.put(user.getUserID(), user);
+
 		logger.info(user.toString());
 		logger.info("User with ID created");
 	}
@@ -64,6 +74,8 @@ public class UserManagementService
 	@Produces(MediaType.APPLICATION_JSON_VALUE)
 	public void updateUser(User user, @PathParam("userID") long userID)
 	{
+		users.put(userID, user);
+
 		logger.info(user.toString());
 		logger.info("User with ID updated " + userID);
 	}
@@ -73,6 +85,8 @@ public class UserManagementService
 	@Produces(MediaType.APPLICATION_JSON_VALUE)
 	public void deleteUser(@PathParam("userID") long userID)
 	{
+		users.remove(userID);
+
 		logger.info("User with ID deleted: " + userID);
 	}
 
@@ -81,12 +95,11 @@ public class UserManagementService
 	@Produces(MediaType.IMAGE_JPEG_VALUE)
 	public Response downloadImageFile(@PathParam("userID") long userID, @PathParam("fileID") long fileID) {
 
-		FileUtils.getTempDirectoryPath();
-
-		File file = new File(FileUtils.getTempDirectoryPath()+"/userName-" + fileID + ".jpg");
+		String fileName = userID + "-" + fileID + ".jpg";
+		File file = new File(FilenameUtils.concat(FileUtils.getTempDirectoryPath(), fileName));
 
 		Response.ResponseBuilder responseBuilder = Response.ok(file);
-		responseBuilder.header("Content-Disposition", "attachment; filename=\"logo.jpg\"");
+		responseBuilder.header("Content-Disposition", "attachment; filename=\"" + fileName+ "\"");
 		return responseBuilder.build();
 	}
 
@@ -99,16 +112,19 @@ public class UserManagementService
 			@FormDataParam("file") InputStream fileInputStream,
 			@FormDataParam("file") FormDataContentDisposition fileFormDataContentDisposition) {
 
-		String uploadFilePath = writeToFileServer(fileInputStream, "/userName-1.jpg");
-		return Response.ok("File uploaded successfully at " + uploadFilePath).build();
+		int fileIdCounter = fileIdCounters.containsKey(userID) ? fileIdCounters.get(userID) : 0;
+		fileIdCounter++;
+		String fileName = userID + "-" + fileIdCounter + ".jpg";
+		writeToFileServer(fileInputStream, fileName);
+		fileIdCounters.put(userID, fileIdCounter);
+		return Response.ok("File uploaded successfully with ID" + fileIdCounter).build();
 	}
 
-	private String writeToFileServer(InputStream inputStream, String fileName) {
+	private void writeToFileServer(InputStream inputStream, String fileName) {
 
 		OutputStream outputStream = null;
-		String qualifiedUploadFilePath = FileUtils.getTempDirectoryPath() + fileName;
 		try {
-			outputStream = new FileOutputStream(new File(qualifiedUploadFilePath));
+			outputStream = new FileOutputStream(new File(FilenameUtils.concat(FileUtils.getTempDirectoryPath(), fileName)));
 			IOUtils.copy(inputStream, outputStream);
 		}
 		catch (IOException ioe) {
@@ -117,6 +133,5 @@ public class UserManagementService
 		finally{
 			IOUtils.closeQuietly(outputStream);
 		}
-		return qualifiedUploadFilePath;
 	}
 }
