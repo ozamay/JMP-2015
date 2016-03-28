@@ -26,7 +26,7 @@ public class EmployeeManagerImpl extends AbstractManager<Employee, EmployeeDAO> 
 	@Transactional
 	public void addToUnit(long employeeID, long unitID)
 	{
-		Unit unit = unitManager.find(unitID);
+		Unit unit = unitManager.find(5);
 		Employee employee = find(employeeID);
 
 		if (unit != null && employee != null)

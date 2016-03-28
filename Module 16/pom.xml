@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.epam.olukash</groupId>
-	<artifactId>module15</artifactId>
+	<artifactId>module16</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>Module 16</name>
 
@@ -45,11 +45,6 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.springframework</groupId>-->
-			<!--<artifactId>spring-webmvc</artifactId>-->
-			<!--<version>${spring-version}</version>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
