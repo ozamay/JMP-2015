@@ -3,6 +3,7 @@ package com.epam.olukash.manager;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.epam.olukash.dao.AbstractDAO;
 import com.epam.olukash.dto.AbstractBean;
@@ -15,26 +16,31 @@ public class AbstractManager<T extends AbstractBean, V extends AbstractDAO<T>> i
 	@Autowired
 	protected V beanDAO;
 
+	@Transactional
 	public long save(T bean)
 	{
 		return beanDAO.save(bean);
 	}
 
+	@Transactional
 	public T find(long id)
 	{
 		return beanDAO.find(id);
 	}
 
+	@Transactional
 	public void update(T bean)
 	{
 	 	beanDAO.update(bean);
 	}
 
+	@Transactional
 	public void remove(long id)
 	{
 	 	beanDAO.delete(id);
 	}
 
+	@Transactional
 	public List<T> findAll()
 	{
 		return beanDAO.findAll();

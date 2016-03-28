@@ -1,15 +1,11 @@
 package com.epam.olukash.manager;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.epam.olukash.dao.EmployeeDAO;
 import com.epam.olukash.dto.Employee;
-import com.epam.olukash.dto.EmployeePersonalInfo;
 import com.epam.olukash.dto.Project;
 import com.epam.olukash.dto.Unit;
 
@@ -27,6 +23,7 @@ public class EmployeeManagerImpl extends AbstractManager<Employee, EmployeeDAO> 
 	@Autowired
 	protected EmployeePersonalInfoManager personalInfoManager;
 
+	@Transactional
 	public void addToUnit(long employeeID, long unitID)
 	{
 		Unit unit = unitManager.find(unitID);
@@ -39,6 +36,7 @@ public class EmployeeManagerImpl extends AbstractManager<Employee, EmployeeDAO> 
 		}
 	}
 
+	@Transactional
 	public void assignToProject(long employeeID, long projectID)
 	{
 		Project project = projectManager.find(projectID);
@@ -46,17 +44,7 @@ public class EmployeeManagerImpl extends AbstractManager<Employee, EmployeeDAO> 
 
 		if (project != null && employee != null)
 		{
-			if(employee.getProjects() == null)
-			{
-				Set<Project> projects = new HashSet<>();
-				projects.add(project);
-				employee.setProjects(projects);
-			}
-			else
-			{
-				employee.getProjects().add(project);
-			}
-
+			employee.getProjects().add(project);
 			update(employee);
 		}
 	}

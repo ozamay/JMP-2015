@@ -30,7 +30,7 @@ public class Project extends AbstractBean
 	@Column(name = "projectName", nullable=false)
 	private String projectName;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "projects")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "projects")
 	private Set<Employee> employees;
 
 	@Override

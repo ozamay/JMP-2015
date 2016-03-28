@@ -51,7 +51,7 @@ public class Employee extends AbstractBean
 	@PrimaryKeyJoinColumn
 	private EmployeePersonalInfo personalInfo;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "employee_project", joinColumns = {
 			@JoinColumn(name = "EMPLOYEEID", nullable = false, updatable = false) },
 			inverseJoinColumns = { @JoinColumn(name = "PROJECTID",
