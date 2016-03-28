@@ -22,7 +22,6 @@ public class AbstractManager<T extends AbstractBean, V extends AbstractDAO<T>> i
 		return beanDAO.save(bean);
 	}
 
-	@Transactional
 	public T find(long id)
 	{
 		return beanDAO.find(id);
@@ -40,7 +39,6 @@ public class AbstractManager<T extends AbstractBean, V extends AbstractDAO<T>> i
 	 	beanDAO.delete(id);
 	}
 
-	@Transactional
 	public List<T> findAll()
 	{
 		return beanDAO.findAll();

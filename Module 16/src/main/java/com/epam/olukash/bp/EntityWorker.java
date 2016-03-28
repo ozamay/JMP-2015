@@ -2,7 +2,6 @@ package com.epam.olukash.bp;
 
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.epam.olukash.dto.Address;
@@ -13,13 +12,10 @@ import com.epam.olukash.dto.Project;
 import com.epam.olukash.dto.Unit;
 import com.epam.olukash.manager.EmployeeManager;
 import com.epam.olukash.manager.EmployeeManagerImpl;
-import com.epam.olukash.manager.EmployeePersonalInfoManager;
-import com.epam.olukash.manager.EmployeePersonalInfoManagerImpl;
 import com.epam.olukash.manager.ProjectManager;
 import com.epam.olukash.manager.ProjectManagerImpl;
 import com.epam.olukash.manager.UnitManager;
 import com.epam.olukash.manager.UnitManagerImpl;
-import com.sun.deploy.net.proxy.pac.PACFunctionsImpl;
 
 /**
  * @author Oleksii.Lukash
@@ -35,8 +31,8 @@ public class EntityWorker
 		ProjectManager projectManager =  context.getBean(ProjectManagerImpl.class);
 		UnitManager unitManager = context.getBean(UnitManagerImpl.class);
 
-		Employee employeeOleksii = createEmployee();
-		Employee employeeXZ = createEmployee2();
+		Employee employeeOleksii = createEmployee("Junior Java Developer", "Oleksii", EmployeeStatus.NIIGER, 27);
+		Employee employeeXZ = createEmployee("Middle Java Developer", "XZ", EmployeeStatus.NIIGER, 27);
 		Long employeeOleksiiID = employeeManager.save(employeeOleksii);
 		Long employeeXZID = employeeManager.save(employeeXZ);
 		logger.info("Employee Oleksii saved with ID: " + employeeOleksiiID);
@@ -62,38 +58,26 @@ public class EntityWorker
 		context.close();
 	}
 
-	private Employee createEmployee()
+	private Employee createEmployee(String position, String name, EmployeeStatus status, int age)
 	{
 		Employee employee = new Employee();
-		employee.setPosition("Midle Java Developer");
-		employee.setEmployeeStatus(EmployeeStatus.NIIGER);
-		Address address = new Address();
-		address.setCity("Minsk");
-		address.setStreet("R40");
-		employee.setAddress(address);
+		employee.setPosition(position);
+		employee.setEmployeeStatus(status);
+		employee.setAddress(createAddress());
 		EmployeePersonalInfo info = new EmployeePersonalInfo();
-		info.setEmployeeName("Oleksii");
-		info.setAge(27);
+		info.setEmployeeName(name);
+		info.setAge(age);
 		info.setEmployee(employee);
 		employee.setPersonalInfo(info);
 		return employee;
 	}
 
-	private Employee createEmployee2()
+	private Address createAddress()
 	{
-		Employee employee = new Employee();
-		employee.setPosition("Junior Java Developer");
-		employee.setEmployeeStatus(EmployeeStatus.DONKEY);
 		Address address = new Address();
 		address.setCity("Minsk");
 		address.setStreet("R40");
-		employee.setAddress(address);
-		EmployeePersonalInfo info = new EmployeePersonalInfo();
-		info.setEmployeeName("XZ");
-		info.setAge(20);
-		info.setEmployee(employee);
-		employee.setPersonalInfo(info);
-		return employee;
+		return address;
 	}
 
 	private Project createProject()

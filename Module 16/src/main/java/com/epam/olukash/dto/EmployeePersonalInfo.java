@@ -1,6 +1,5 @@
 package com.epam.olukash.dto;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,15 +21,15 @@ public class EmployeePersonalInfo extends AbstractBean
 	public static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "employeeID", nullable=false)
+	@Column(nullable=false)
 	@SequenceGenerator(name = "empInfo_seq", sequenceName = "empInfo_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "empInfo_seq")
 	private long EmployeePersonalInfoID;
 
-	@Column(name = "employeeName", nullable=false)
+	@Column( nullable=false)
 	private String employeeName;
 
-	@Column(name = "age", nullable=false)
+	@Column(nullable=false)
 	private int age;
 
 

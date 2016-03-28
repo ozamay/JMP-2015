@@ -23,8 +23,7 @@ public abstract class AbstractDAO<T>
 	{
 		try
 		{
-			Session session = sessionFactory.getCurrentSession();
-			return (Long) session.save(bean);
+			return (Long) getSession().save(bean);
 		}
 		catch (Exception e)
 		{
@@ -37,8 +36,7 @@ public abstract class AbstractDAO<T>
 	{
 		try
 		{
-			Session session = sessionFactory.getCurrentSession();
-			T bean = (T) session.get(getClazz(), beanID);
+			T bean = (T) getSession().get(getClazz(), beanID);
 			return bean;
 		}
 		catch (Exception e)
@@ -52,8 +50,7 @@ public abstract class AbstractDAO<T>
 	{
 		try
 		{
-			Session session = sessionFactory.getCurrentSession();
-			session.saveOrUpdate(bean);
+			getSession().saveOrUpdate(bean);
 		}
 		catch (Exception e)
 		{
@@ -66,9 +63,8 @@ public abstract class AbstractDAO<T>
 	{
 		try
 		{
-			Session session = sessionFactory.getCurrentSession();
-			T bean = (T) session.get(getClazz(), beanID);
-			session.delete(bean);
+			T bean = (T) getSession().get(getClazz(), beanID);
+			getSession().delete(bean);
 		}
 		catch (Exception e)
 		{
@@ -81,8 +77,7 @@ public abstract class AbstractDAO<T>
 	{
 		try
 		{
-			Session session = sessionFactory.getCurrentSession();
-			List<T> beans = (List<T>) session.createCriteria(getClazz()).list();
+			List<T> beans = (List<T>) getSession().createCriteria(getClazz()).list();
 			return beans;
 		}
 		catch (Exception e)
@@ -93,4 +88,9 @@ public abstract class AbstractDAO<T>
 	}
 
 	protected abstract Class<? extends AbstractBean> getClazz();
+
+	protected Session getSession()
+	{
+		return sessionFactory.getCurrentSession();
+	}
 }

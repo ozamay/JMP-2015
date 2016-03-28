@@ -32,15 +32,14 @@ public class Employee extends AbstractBean
 	public static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "employeeID", nullable=false)
 	@SequenceGenerator(name = "emp_seq", sequenceName = "emp_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "emp_seq")
 	private long employeeID;
 
-	@Column(name = "position", nullable=false)
+	@Column(nullable=false)
 	private String position;
 
-	@Column(name = "employeeStatus", nullable=false)
+	@Column(nullable=false)
 	@Enumerated(EnumType.ORDINAL)
 	private EmployeeStatus employeeStatus;
 
@@ -56,7 +55,7 @@ public class Employee extends AbstractBean
 			@JoinColumn(name = "EMPLOYEEID", nullable = false, updatable = false) },
 			inverseJoinColumns = { @JoinColumn(name = "PROJECTID",
 					nullable = false, updatable = false) })
-	private Set<Project> projects = new HashSet<>(0);
+	private Set<Project> projects = new HashSet<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "unitID")
