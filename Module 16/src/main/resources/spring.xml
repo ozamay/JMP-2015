@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd ">
+
+	<context:component-scan base-package="com.epam.olukash.*"/>
+	<context:property-placeholder location="classpath:db.properties" ignore-resource-not-found="false" />
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${database.driver}" />
+		<property name="url" value="${database.url}" />
+		<property name="username" value="${database.login}" />
+		<property name="password" value="${database.password}" />
+	</bean>
+
+
+	<!-- Hibernate 4 SessionFactory Bean definition -->
+	<bean id="hibernate4AnnotatedSessionFactory"
+		  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/hibernate.cfg.xml" />
+	</bean>
+
+	<bean id="transactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="employeeManager" class="com.epam.olukash.manager.EmployeeManagerImpl"/>
+	<bean id="employeePersonalInfoManager" class="com.epam.olukash.manager.EmployeePersonalInfoManagerImpl"/>
+	<bean id="projectManager" class="com.epam.olukash.manager.ProjectManagerImpl"/>
+	<bean id="unitManager" class="com.epam.olukash.manager.UnitManagerImpl"/>
+
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+</beans>
