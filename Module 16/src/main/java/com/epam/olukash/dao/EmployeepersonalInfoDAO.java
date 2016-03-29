@@ -9,7 +9,7 @@ import com.epam.olukash.dto.EmployeePersonalInfo;
  * @author Oleksii.Lukash
  */
 @Repository
-public class EmployeePersonalInfodao extends AbstractDAO<EmployeePersonalInfo>
+public class EmployeePersonalInfoDAO extends AbstractDAO<EmployeePersonalInfo>
 {
 	protected Class<? extends AbstractBean> getClazz()
 	{
