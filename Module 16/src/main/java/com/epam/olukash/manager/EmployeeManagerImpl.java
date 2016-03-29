@@ -21,7 +21,7 @@ public class EmployeeManagerImpl extends AbstractManager<Employee, EmployeeDAO> 
 	protected ProjectManager projectManager;
 
 	@Autowired
-	protected EmployeePersonalInfoManager personalInfoManager;
+	protected EmployeePersonalInfoManager2 personalInfoManager;
 
 	@Transactional
 	public void addToUnit(long employeeID, long unitID)

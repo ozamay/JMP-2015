@@ -33,7 +33,7 @@
 	</bean>
 
 	<bean id="employeeManager" class="com.epam.olukash.manager.EmployeeManagerImpl"/>
-	<bean id="employeePersonalInfoManager" class="com.epam.olukash.manager.EmployeePersonalInfoManagerImpl"/>
+	<bean id="employeePersonalInfoManager" class="com.epam.olukash.manager.EmployeePersonalInfoManager2Impl"/>
 	<bean id="projectManager" class="com.epam.olukash.manager.ProjectManagerImpl"/>
 	<bean id="unitManager" class="com.epam.olukash.manager.UnitManagerImpl"/>
 
