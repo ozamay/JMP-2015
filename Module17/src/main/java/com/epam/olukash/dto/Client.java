@@ -29,7 +29,7 @@ public class Client extends AbstractBean
 	private String name;
 
 	@Column
-	@Size(min=1, max=25, message="Name is require")
+	@Size(min=1, max=25, message="Surname is require")
 	private String surName;
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL)
