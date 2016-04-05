@@ -32,7 +32,6 @@ public class BookManagerImpl extends AbstractManager<Book, BookDAO> implements
 		for(Seat seat : book.getSeats())
 		{
 			seat.setBooked(true);
-			seat.setBook(book);
 			seatManager.update(seat);
 		}
 

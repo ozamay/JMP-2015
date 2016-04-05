@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -22,8 +21,7 @@ public class Client extends AbstractBean
 	public static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "client_seq", sequenceName = "client_seq")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "client_seq")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@Column

@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -22,8 +21,7 @@ public class Seat extends AbstractBean
 	public static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "seat_seq", sequenceName = "seat_seq")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seat_seq")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long seatID;
 
 	@Column
@@ -34,10 +32,6 @@ public class Seat extends AbstractBean
 
 	@Column
 	private long price;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "bookID")
-	private Book book;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cinemaSessionID")
@@ -81,16 +75,6 @@ public class Seat extends AbstractBean
 	public void setBooked(boolean booked)
 	{
 		this.booked = booked;
-	}
-
-	public Book getBook()
-	{
-		return book;
-	}
-
-	public void setBook(Book book)
-	{
-		this.book = book;
 	}
 
 	public int getSeatNumber()

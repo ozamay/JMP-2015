@@ -17,6 +17,7 @@ import com.epam.olukash.dto.Book;
 import com.epam.olukash.dto.Client;
 import com.epam.olukash.dto.Seat;
 import com.epam.olukash.manager.BookManager;
+import com.epam.olukash.manager.ClientManager;
 import com.epam.olukash.manager.SeatManager;
 import com.epam.olukash.manager.SessionManager;
 
