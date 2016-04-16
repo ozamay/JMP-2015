@@ -24,10 +24,10 @@
                 <td>${session.filmName}</td>
                 <td><fmt:formatDate value="${session.sessionDate}" pattern="yyyy-MM-dd" /></td>
                 <td>
-                    <c:forEach var="detail" items="${session.cinemaSessionDetails}">
-                        <c:if test="${detail.seatBooked == false}">
-                            ${detail.seatID+1}
-                            <input type="checkbox" name="seatsChose" value="${detail.cinemaSessionDetailID}" >
+                    <c:forEach var="ticket" items="${session.tickets}">
+                        <c:if test="${ticket.bookingID == 0}">
+                            ${ticket.seatID+1}
+                            <input type="checkbox" name="seatsChose" value="${ticket.ticketID}" >
                         </c:if>
                     </c:forEach>
                 </td>

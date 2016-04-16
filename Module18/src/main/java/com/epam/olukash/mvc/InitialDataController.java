@@ -16,13 +16,13 @@ public class InitialDataController
 {
 	@Autowired private InitialDataLoader initialDataLoader;
 
-	@RequestMapping(value = {"/init" }, method = RequestMethod.GET)
-	public String initialData() {
+	@RequestMapping(value = {"" }, method = RequestMethod.GET)
+	public String initialDataView() {
 		return "initialData";
 	}
 
-	@RequestMapping(value = {"/setup" }, method = RequestMethod.GET)
-	public String viewCreateData() {
+	@RequestMapping(value = {"" }, method = RequestMethod.POST)
+	public String setUpInitialData() {
 		initialDataLoader.setUpInitialData();
 		return "redirect:/";
 	}

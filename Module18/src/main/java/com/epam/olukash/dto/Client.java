@@ -7,7 +7,8 @@ import javax.validation.constraints.Size;
  */
 public class Client extends AbstractBean
 {
-	public static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1123412132212L;
+
 	private long clientID;
 
 	@Size(min=1, max=100, message="Name is require")

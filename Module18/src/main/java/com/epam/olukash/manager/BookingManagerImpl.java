@@ -9,10 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.epam.olukash.dao.BookingDAO;
 import com.epam.olukash.dto.Booking;
-import com.epam.olukash.dto.BookingDetail;
-import com.epam.olukash.dto.CinemaSessionDetail;
+import com.epam.olukash.dto.Ticket;
 import com.epam.olukash.dto.Client;
-import com.epam.olukash.dto.Seat;
 
 /**
  * @author Oleksii.Lukash
@@ -23,40 +21,33 @@ public class BookingManagerImpl extends AbstractManager<Booking, BookingDAO> imp
 {
 	@Autowired SeatManager seatManager;
 	@Autowired ClientManager clientManager;
-	@Autowired CinemaSessionDetailManager cinemaSessionDetailManager;
-	@Autowired BookingDetailManager bookingDetailManager;
+	@Autowired TicketManager ticketManager;
 
 	@Override
-	public Booking saveNew(Booking booking, Client client, Set<Long> detailListIDs)
+	public Booking saveNew(Booking booking, Client client, Set<Long> ticketsIDs)
 	{
 		Long bookingID = save(booking);
 		booking.setBookingID(bookingID);
 
-		List<BookingDetail> bookingDetails = new ArrayList<>();
+		List<Ticket> tickets = new ArrayList<>();
 		int ticketPrice = 0;
-		for (Long detailID : detailListIDs)
+		for (Long ticketID : ticketsIDs)
 		{
-			CinemaSessionDetail cinemaSessionDetail = cinemaSessionDetailManager.find(detailID);
-
-			BookingDetail bookingDetail = new BookingDetail();
-			bookingDetail.setCinemaSessionDetailID(cinemaSessionDetail.getCinemaSessionDetailID());
-			bookingDetail.setBookingID(bookingID);
-			bookingDetail.setBookingID(bookingDetailManager.save(bookingDetail));
-			bookingDetails.add(bookingDetail);
-
-			ticketPrice += seatManager.find(cinemaSessionDetail.getSeatID()).getPrice();
-			cinemaSessionDetail.setSeatBooked(true);
-			cinemaSessionDetailManager.update(cinemaSessionDetail);
+			Ticket ticket = ticketManager.find(ticketID);
+			tickets.add(ticket);
+			ticketPrice += ticket.getTicketPrice();
+			ticket.setBookingID(bookingID);
+			ticketManager.update(ticket);
 		}
 
 		Long clientID = clientManager.save(client);
 		booking.setClientID(clientID);
-		booking.setTicketPrice(ticketPrice);
+		booking.setTicketsPrice(ticketPrice);
 		booking.setBookingNumber(client.getName() + "-" + booking.getBookingID());
 
 		update(booking);
 
-		booking.setBookingDetails(bookingDetails);
+		booking.setTickets(tickets);
 		return booking;
 	}
 
@@ -66,13 +57,4 @@ public class BookingManagerImpl extends AbstractManager<Booking, BookingDAO> imp
 		return beanDAO.findByBookNumber(bookNumber);
 	}
 
-	private long calculateTicketsPrice(List<Seat> seats)
-	{
-		long  ticketPrice = 0;
-		for (Seat seat : seats)
-		{
-			ticketPrice += seat.getPrice();
-		}
-		return ticketPrice;
-	}
 }

@@ -21,9 +21,9 @@ import com.epam.olukash.dto.CinemaSession;
  * @author Oleksii.Lukash
  */
 @Repository
-public class SessionDAO extends AbstractDAO<CinemaSession>
+public class CinemaSessionDAO extends AbstractDAO<CinemaSession>
 {
-	private static final Logger logger = Logger.getLogger(SessionDAO.class);
+	private static final Logger logger = Logger.getLogger(CinemaSessionDAO.class);
 
 	private static final String SQL_INSERT = "INSERT INTO CINEMASESSION(sessionDate, filmName) VALUES (?,?)";
 	private static final String SQL_UPDATE = "UPDATE CINEMASESSION SET sessionDate = ?, filmName = ? WHERE cinemaSessionID = ?";

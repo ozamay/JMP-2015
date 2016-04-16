@@ -7,12 +7,23 @@ import java.util.List;
  */
 public class Booking extends AbstractBean
 {
-	public static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1123412L;
+
 	private long bookingID;
 	private String bookingNumber;
-	private int ticketPrice;
-	private List<BookingDetail> bookingDetails;
+	private int ticketsPrice;
+	private List<Ticket> tickets;
 	private long clientID;
+
+	public List<Ticket> getTickets()
+	{
+		return tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets)
+	{
+		this.tickets = tickets;
+	}
 
 	public long getBookingID()
 	{
@@ -34,24 +45,14 @@ public class Booking extends AbstractBean
 		this.bookingNumber = bookingNumber;
 	}
 
-	public int getTicketPrice()
+	public int getTicketsPrice()
 	{
-		return ticketPrice;
+		return ticketsPrice;
 	}
 
-	public void setTicketPrice(int ticketPrice)
+	public void setTicketsPrice(int ticketsPrice)
 	{
-		this.ticketPrice = ticketPrice;
-	}
-
-	public List<BookingDetail> getBookingDetails()
-	{
-		return bookingDetails;
-	}
-
-	public void setBookingDetails(List<BookingDetail> bookingDetails)
-	{
-		this.bookingDetails = bookingDetails;
+		this.ticketsPrice = ticketsPrice;
 	}
 
 	public long getClientID()

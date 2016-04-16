@@ -6,21 +6,10 @@ package com.epam.olukash.dto;
 
 public class Seat extends AbstractBean
 {
-	public static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 11412132212L;
 
 	private long seatID;
 	private int seatNumber;
-	private long price;
-
-	public long getPrice()
-	{
-		return price;
-	}
-
-	public void setPrice(long price)
-	{
-		this.price = price;
-	}
 
 	public long getSeatID()
 	{

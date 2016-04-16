@@ -17,10 +17,10 @@ import com.epam.olukash.dto.Seat;
 @Repository
 public class SeatDAO extends AbstractDAO<Seat>
 {
-	private static final String SQL_INSERT = "INSERT INTO SEAT (seatNumber, price) VALUES (?,?)";
-	private static final String SQL_UPDATE = "UPDATE SEAT SET seatNumber = ?, price = ? WHERE seatID = ?";
-	private static final String SQL_FIND_BY_ID = "SELECT seatID, seatNumber, price FROM SEAT WHERE seatID = ?";
-	private static final String SQL_FIND_ALL = "SELECT seatID, seatNumber, price FROM SEAT";
+	private static final String SQL_INSERT = "INSERT INTO SEAT (seatNumber) VALUES (?)";
+	private static final String SQL_UPDATE = "UPDATE SEAT SET seatNumber = ? WHERE seatID = ?";
+	private static final String SQL_FIND_BY_ID = "SELECT seatID, seatNumber FROM SEAT WHERE seatID = ?";
+	private static final String SQL_FIND_ALL = "SELECT seatID, seatNumber FROM SEAT";
 	private static final String SQL_REMOVE = "REMOVE FROM SEAT WHERE seatID = ?";
 
 	@Override
@@ -57,13 +57,12 @@ public class SeatDAO extends AbstractDAO<Seat>
 	protected void populateStatement(Seat bean, PreparedStatement ps) throws SQLException
 	{
 		ps.setInt(1, bean.getSeatNumber());
-		ps.setLong(1, bean.getPrice());
 	}
 
 	@Override
 	protected Object[] getUpdateParam(Seat bean)
 	{
-		return new Object[]{bean.getSeatNumber(), bean.getPrice(), bean.getSeatID()};
+		return new Object[]{bean.getSeatNumber(), bean.getSeatID()};
 	}
 
 	@Override
@@ -74,7 +73,6 @@ public class SeatDAO extends AbstractDAO<Seat>
 			Seat seat = new Seat();
 			seat.setSeatID(Long.parseLong(String.valueOf(row.get("seatID"))));
 			seat.setSeatNumber(Integer.parseInt(String.valueOf(row.get("seatNumber"))));
-			seat.setPrice(Integer.parseInt(String.valueOf(row.get("price"))));
 			seatList.add(seat);
 		}
 		return seatList;

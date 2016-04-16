@@ -18,11 +18,11 @@ import com.epam.olukash.dto.Booking;
 @Repository
 public class BookingDAO extends AbstractDAO<Booking>
 {
-	private static final String SQL_FIND_BY_NAME = "SELECT bookingID, bookingNumber, ticketPrice, clientID FROM BOOKING WHERE bookingNumber = ?";
-	private static final String SQL_INSERT = "INSERT INTO BOOKING (bookingNumber, ticketPrice, clientID) VALUES (?,?,?)";
-	private static final String SQL_UPDATE = "UPDATE BOOKING SET bookingNumber = ?, ticketPrice = ?, clientID = ? WHERE bookingID = ?";
-	private static final String SQL_FIND_BY_ID = "SELECT bookingID, bookingNumber, ticketPrice, clientID FROM BOOKING WHERE bookingID = ?";
-	private static final String SQL_FIND_ALL = "SELECT bookingID, bookingNumber, ticketPrice, clientID FROM BOOKING";
+	private static final String SQL_FIND_BY_NAME = "SELECT bookingID, bookingNumber, ticketsPrice, clientID FROM BOOKING WHERE bookingNumber = ?";
+	private static final String SQL_INSERT = "INSERT INTO BOOKING (bookingNumber, ticketsPrice, clientID) VALUES (?,?,?)";
+	private static final String SQL_UPDATE = "UPDATE BOOKING SET bookingNumber = ?, ticketsPrice = ?, clientID = ? WHERE bookingID = ?";
+	private static final String SQL_FIND_BY_ID = "SELECT bookingID, bookingNumber, ticketsPrice, clientID FROM BOOKING WHERE bookingID = ?";
+	private static final String SQL_FIND_ALL = "SELECT bookingID, bookingNumber, ticketsPrice, clientID FROM BOOKING";
 	private static final String SQL_REMOVE = "REMOVE FROM BOOKING WHERE bookingID = ?";
 
 	public Booking findByBookNumber(String bookNumber)
@@ -64,14 +64,14 @@ public class BookingDAO extends AbstractDAO<Booking>
 	protected void populateStatement(Booking bean, PreparedStatement ps) throws SQLException
 	{
 		ps.setString(1, bean.getBookingNumber());
-		ps.setInt(2, bean.getTicketPrice());
+		ps.setInt(2, bean.getTicketsPrice());
 		ps.setLong(3, bean.getClientID());
 	}
 
 	@Override
 	protected Object[] getUpdateParam(Booking bean)
 	{
-		return new Object[]{bean.getBookingNumber(), bean.getTicketPrice(), bean.getClientID(), bean.getBookingID()};
+		return new Object[]{bean.getBookingNumber(), bean.getTicketsPrice(), bean.getClientID(), bean.getBookingID()};
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class BookingDAO extends AbstractDAO<Booking>
 		for(Map<String,Object> row : rows){
 			Booking booking = new Booking();
 			booking.setBookingID(Long.parseLong(String.valueOf(row.get("bookingID"))));
-			booking.setTicketPrice(Integer.parseInt(String.valueOf(row.get("ticketPrice"))));
+			booking.setTicketsPrice(Integer.parseInt(String.valueOf(row.get("ticketPrice"))));
 			booking.setBookingNumber(String.valueOf(row.get("bookingNumber")));
 			booking.setClientID(Long.parseLong(String.valueOf(row.get("clientID"))));
 			bookingList.add(booking);

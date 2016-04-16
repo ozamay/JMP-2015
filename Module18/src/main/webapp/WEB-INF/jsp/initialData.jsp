@@ -8,7 +8,7 @@
 <body>
 <h2>Crate initial Data</h2>
 <table>
-    <form name="database" method="GET" action="setup">
+    <form name="database" method="POST" action="">
         <tr>
             <td><button type="submit">create</button></td>
         </tr>

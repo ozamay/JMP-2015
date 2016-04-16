@@ -2,14 +2,15 @@ package com.epam.olukash.mvc;
 
 import com.epam.olukash.dto.CinemaSession;
 import com.epam.olukash.dto.Seat;
+import com.epam.olukash.dto.Ticket;
 
 /**
  * @author Oleksii_Lukash
  */
 public class BookInfoDTO
 {
-	private long bookingID;
 	private CinemaSession cinemaSession;
+	private Ticket ticket;
 	private Seat seat;
 
 	public Seat getSeat()
@@ -22,6 +23,16 @@ public class BookInfoDTO
 		this.seat = seat;
 	}
 
+	public Ticket getTicket()
+	{
+		return ticket;
+	}
+
+	public void setTicket(Ticket ticket)
+	{
+		this.ticket = ticket;
+	}
+
 	public CinemaSession getCinemaSession()
 	{
 		return cinemaSession;
@@ -31,16 +42,4 @@ public class BookInfoDTO
 	{
 		this.cinemaSession = cinemaSession;
 	}
-
-	public long getBookingID()
-	{
-		return bookingID;
-	}
-
-	public void setBookingID(long bookingID)
-	{
-		this.bookingID = bookingID;
-	}
-
-
 }

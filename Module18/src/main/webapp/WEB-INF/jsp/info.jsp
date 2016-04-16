@@ -15,11 +15,11 @@
                     <td>${dto.cinemaSession.filmName}</td>
                     <td><fmt:formatDate value="${dto.cinemaSession.sessionDate}" pattern="yyyy-MM-dd" /></td>
                     <td>${dto.seat.seatNumber}</td>
-                    <td>${dto.seat.price}$</td>
+                    <td>${dto.ticket.ticketPrice}$</td>
                 </tr>
             </c:forEach>
             <tr>
-                <td>Total Price: ${booking.ticketPrice}$</td>
+                <td>Total Price: ${booking.ticketsPrice}$</td>
             </tr>
             <tr>
                 <td>Name: ${client.name}</td>

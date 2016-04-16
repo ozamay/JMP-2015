@@ -53,7 +53,9 @@ public abstract class AbstractDAO<T>
 	{
 		try
 		{
-			return (T) jdbcTemplate.queryForObject(getFindSQL(), new Object[]{beanID}, new BeanPropertyRowMapper<>(getClazz()));
+			BeanPropertyRowMapper bprm = new BeanPropertyRowMapper<>(getClazz());
+			bprm.setPrimitivesDefaultedForNullValue(true);
+			return (T) jdbcTemplate.queryForObject(getFindSQL(), new Object[]{beanID}, bprm);
 		}
 		catch (Exception e)
 		{

@@ -8,12 +8,12 @@ import java.util.List;
  */
 public class CinemaSession extends AbstractBean
 {
-	public static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 11234121312L;
 
 	private long cinemaSessionID;
 	private Date sessionDate;
 	private String filmName;
-	private List<CinemaSessionDetail> cinemaSessionDetails;
+	private List<Ticket> tickets;
 
 	public long getCinemaSessionID()
 	{
@@ -45,13 +45,13 @@ public class CinemaSession extends AbstractBean
 		this.filmName = filmName;
 	}
 
-	public List<CinemaSessionDetail> getCinemaSessionDetails()
+	public List<Ticket> getTickets()
 	{
-		return cinemaSessionDetails;
+		return tickets;
 	}
 
-	public void setCinemaSessionDetails(List<CinemaSessionDetail> cinemaSessionDetails)
+	public void setTickets(List<Ticket> tickets)
 	{
-		this.cinemaSessionDetails = cinemaSessionDetails;
+		this.tickets = tickets;
 	}
 }

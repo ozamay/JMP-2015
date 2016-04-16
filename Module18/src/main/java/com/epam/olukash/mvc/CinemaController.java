@@ -18,12 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.epam.olukash.dto.Booking;
-import com.epam.olukash.dto.BookingDetail;
-import com.epam.olukash.dto.CinemaSessionDetail;
+import com.epam.olukash.dto.Ticket;
 import com.epam.olukash.dto.Client;
-import com.epam.olukash.manager.BookingDetailManager;
 import com.epam.olukash.manager.BookingManager;
-import com.epam.olukash.manager.CinemaSessionDetailManager;
+import com.epam.olukash.manager.TicketManager;
 import com.epam.olukash.manager.ClientManager;
 import com.epam.olukash.manager.SeatManager;
 import com.epam.olukash.manager.SessionManager;
@@ -39,8 +37,7 @@ public class CinemaController
 	@Autowired private BookingManager bookingManager;
 	@Autowired private SessionManager sessionManager;
 	@Autowired private ClientManager clientManager;
-	@Autowired private BookingDetailManager bookingDetailManager;
-	@Autowired private CinemaSessionDetailManager cinemaSessionDetailManager;
+	@Autowired private TicketManager ticketManager;
 
 	@RequestMapping(value = {"/sessions" }, method = RequestMethod.GET)
 	public String viewSessions(ModelMap model,
@@ -95,13 +92,12 @@ public class CinemaController
 	private void populateDTOs(ModelMap map, Long bookID)
 	{
 		List<BookInfoDTO> dtos = new ArrayList<>();
-		for(BookingDetail bookingDetail : bookingDetailManager.findByBookingID(bookID))
+		for(Ticket ticket : ticketManager.getTicketsByBookingID(bookID))
 		{
-			CinemaSessionDetail cinemaSessionDetail = cinemaSessionDetailManager.find(bookingDetail.getCinemaSessionDetailID());
-
 			BookInfoDTO dto = new BookInfoDTO();
-			dto.setCinemaSession(sessionManager.find(cinemaSessionDetail.getCinemaSessionID()));
-			dto.setSeat(seatManager.find(cinemaSessionDetail.getSeatID()));
+			dto.setCinemaSession(sessionManager.find(ticket.getCinemaSessionID()));
+			dto.setTicket(ticket);
+			dto.setSeat(seatManager.find(ticket.getSeatID()));
 			dtos.add(dto);
 		}
 		map.addAttribute("bookingInfoDTOs", dtos);
