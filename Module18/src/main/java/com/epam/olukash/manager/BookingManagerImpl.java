@@ -1,7 +1,5 @@
 package com.epam.olukash.manager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +27,10 @@ public class BookingManagerImpl extends AbstractManager<Booking, BookingDAO> imp
 		Long bookingID = save(booking);
 		booking.setBookingID(bookingID);
 
-		List<Ticket> tickets = new ArrayList<>();
 		int ticketPrice = 0;
 		for (Long ticketID : ticketsIDs)
 		{
 			Ticket ticket = ticketManager.find(ticketID);
-			tickets.add(ticket);
 			ticketPrice += ticket.getTicketPrice();
 			ticket.setBookingID(bookingID);
 			ticketManager.update(ticket);
