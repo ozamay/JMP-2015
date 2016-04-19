@@ -10,7 +10,7 @@ public class Ticket extends AbstractBean
 	private long ticketID;
 	private long cinemaSessionID;
 	private long seatID;
-	private long bookingID;
+	private Long bookingID;
 	private int ticketPrice;
 
 	public int getTicketPrice()

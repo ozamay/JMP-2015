@@ -25,7 +25,7 @@
                 <td><fmt:formatDate value="${session.sessionDate}" pattern="yyyy-MM-dd" /></td>
                 <td>
                     <c:forEach var="ticket" items="${session.tickets}">
-                        <c:if test="${ticket.bookingID == 0}">
+                        <c:if test="${ticket.bookingID == null}">
                             ${ticket.seatID+1}
                             <input type="checkbox" name="seatsChose" value="${ticket.ticketID}" >
                         </c:if>

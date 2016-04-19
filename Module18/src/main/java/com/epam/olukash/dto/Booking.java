@@ -1,7 +1,5 @@
 package com.epam.olukash.dto;
 
-import java.util.List;
-
 /**
  * @author Oleksii.Lukash
  */
@@ -12,18 +10,7 @@ public class Booking extends AbstractBean
 	private long bookingID;
 	private String bookingNumber;
 	private int ticketsPrice;
-	private List<Ticket> tickets;
 	private long clientID;
-
-	public List<Ticket> getTickets()
-	{
-		return tickets;
-	}
-
-	public void setTickets(List<Ticket> tickets)
-	{
-		this.tickets = tickets;
-	}
 
 	public long getBookingID()
 	{

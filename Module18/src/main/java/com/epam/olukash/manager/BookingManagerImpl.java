@@ -47,7 +47,6 @@ public class BookingManagerImpl extends AbstractManager<Booking, BookingDAO> imp
 
 		update(booking);
 
-		booking.setTickets(tickets);
 		return booking;
 	}
 
