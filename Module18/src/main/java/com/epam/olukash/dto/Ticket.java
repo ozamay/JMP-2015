@@ -33,12 +33,12 @@ public class Ticket extends AbstractBean
 		this.ticketID = ticketID;
 	}
 
-	public long getBookingID()
+	public Long getBookingID()
 	{
 		return bookingID;
 	}
 
-	public void setBookingID(long bookingID)
+	public void setBookingID(Long bookingID)
 	{
 		this.bookingID = bookingID;
 	}

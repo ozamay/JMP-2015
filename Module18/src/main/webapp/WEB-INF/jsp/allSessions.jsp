@@ -22,7 +22,7 @@
         <c:forEach items="${sessions}" var="session">
             <tr>
                 <td>${session.filmName}</td>
-                <td><fmt:formatDate value="${session.sessionDate}" pattern="yyyy-MM-dd" /></td>
+                <td><fmt:formatDate value="${session.sessionDate}" pattern="yyyy-MM-dd"/></td>
                 <td>
                     <c:forEach var="ticket" items="${session.tickets}">
                         <c:if test="${ticket.bookingID == null}">
